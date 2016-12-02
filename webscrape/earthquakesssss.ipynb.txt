@@ -13,19 +13,7 @@
    "metadata": {
     "collapsed": false
    },
-   "outputs": [
-    {
-     "ename": "ImportError",
-     "evalue": "No module named paretochart",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[0;31mImportError\u001b[0m                               Traceback (most recent call last)",
-      "\u001b[0;32m<ipython-input-2-55267d2e8f9a>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;32mfrom\u001b[0m \u001b[0mdatetime\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mdatetime\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      6\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mpandas\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 7\u001b[0;31m \u001b[0;32mfrom\u001b[0m \u001b[0mparetochart\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mpareto\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      8\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mcsv\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
-      "\u001b[0;31mImportError\u001b[0m: No module named paretochart"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "%matplotlib inline\n",
     "import matplotlib.pyplot as plt\n",
@@ -88,7 +76,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 4,
    "metadata": {
     "collapsed": false
    },
@@ -97,7 +85,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Existem  70  terremotos registrados em rev.seis.sc.edu\n"
+      "Existem  77  terremotos registrados em rev.seis.sc.edu\n"
      ]
     }
    ],
@@ -106,7 +94,7 @@
     "base_url = \"http://rev.seis.sc.edu/earthquakes/?eq_url=\"\n",
     "page = urlopen(site)\n",
     "\n",
-    "soup = bs(page,\"html.parser\")\n",
+    "soup = bs(page, \"html5lib\")\n",
     "options = soup.findAll(\"option\")\n",
     "print \"Existem \",len(options),\" terremotos registrados em rev.seis.sc.edu\""
    ]
@@ -120,16 +108,16 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 5,
    "metadata": {
     "collapsed": false
    },
    "outputs": [],
    "source": [
     "earthquakes = []\n",
-    "for option in options[6:45]:\n",
+    "for option in options[:39]:\n",
     "    myurl = base_url + option['value']\n",
-    "    soup = bs(urlopen(myurl), \"html.parser\")\n",
+    "    soup = bs(urlopen(myurl), \"html5lib\")\n",
     "    titems = soup.findAll('a', {'class': 'definition'})\n",
     "    mylist = [option.find(text=True).split(',')[-2]]\n",
     "    for i in range (1,5):\n",
@@ -139,7 +127,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 18,
    "metadata": {
     "collapsed": false
    },
@@ -178,22 +166,22 @@
       "2016-10-13 21:13:03       4.1      62.8    -124.9      10.0          Canada \n",
       "2016-10-13 03:55:13       5.1      25.5    -109.8      20.0          Mexico \n",
       "2016-10-13 02:48:41       3.6      36.8     -98.3       8.9        Oklahoma \n",
-      "2016-09-01 16:37:57       7.2     -37.5     178.8     159.0     New Zealand \n",
-      "2016-08-29 04:29:57       7.1      -0.0     -17.8      10.0  North of Ascension Island \n",
-      "2016-08-19 07:32:22       7.4     -55.3     -31.9      10.0  South Georgia Island region \n",
-      "2016-08-12 01:26:36       7.6     -22.5     173.1      16.0   New Caledonia \n",
-      "2016-07-29 21:18:24       7.7      18.5     145.8     188.0  Northern Mariana Islands \n",
-      "2016-05-28 09:47:01       7.3     -56.3     -27.0      93.0  South Georgia and the South Sandwich Islands \n",
-      "2016-04-28 19:33:24       7.0     -16.1     167.4      27.0         Vanuatu \n",
-      "2016-04-16 23:58:37       7.8       0.4     -79.9      19.0         Ecuador \n",
-      "2016-04-15 16:25:06       7.0      32.8     130.7      10.0           Japan \n",
-      "2016-03-02 12:49:48       7.8      -4.9      94.3      24.0       Indonesia \n",
-      "2016-01-30 03:25:00       7.0      54.0     158.7     153.0          Russia \n"
+      "2016-10-12 03:21:26       5.7      -5.4     153.5      22.0  Papua New Guinea \n",
+      "2016-10-12 02:57:45       3.9      65.7    -145.2      15.0          Alaska \n",
+      "2016-10-10 20:27:55       3.5      36.4     -96.9       5.0        Oklahoma \n",
+      "2016-10-10 05:24:29       3.8      60.2    -153.8     184.0          Alaska \n",
+      "2016-10-10 00:05:45       3.7      59.1    -152.3      52.0          Alaska \n",
+      "2016-10-09 14:46:27       5.7       1.8     127.5     137.0       Indonesia \n",
+      "2016-10-09 12:23:05       3.8      36.4     -96.9       5.1        Oklahoma \n",
+      "2016-10-09 03:05:02       3.5      65.8    -144.8      15.0          Alaska \n",
+      "2016-10-09 02:28:48       4.1      64.7    -132.8      11.0          Canada \n",
+      "2016-10-08 22:43:49      3.74      34.0    -117.3      14.0              CA \n",
+      "2016-10-08 22:40:12       3.6      62.3    -151.3       2.4          Alaska \n"
      ]
     }
    ],
    "source": [
-    "myquakes = earthquakes[:-1]\n",
+    "myquakes = earthquakes[1:39]\n",
     "print \"Foram escolhidos os seguintes terremotos(%s):\\n\" % len(myquakes)\n",
     "print '%s %20s %9s %10s %8s %10s' % ('Data/hora',\"Mag.\",'Lat.','Long.','Prof.','Local')\n",
     "for quake in myquakes:\n",
@@ -212,19 +200,11 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 7,
    "metadata": {
     "collapsed": false
    },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n"
-     ]
-    }
-   ],
+   "outputs": [],
    "source": [
     "datas = []\n",
     "ocorrencias = []\n",
@@ -247,7 +227,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 22,
    "metadata": {
     "collapsed": false
    },
@@ -256,9 +236,9 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "media da quantidade de terremotos por dia:  2.0\n",
+      "media da quantidade de terremotos por dia:  3.16666666667\n",
       "O rol da qtd. terremotos/dia é:\n",
-      "1   1   1   1   1   1   1   1   1   1   1   1   2   3   3   3   4   5   6   \n",
+      "1   2   2   2   3   3   3   3   4   4   5   6   \n",
       "onde a mediana é 3 e a moda é 3.\n"
      ]
     }
@@ -377,7 +357,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 11,
    "metadata": {
     "collapsed": false,
     "scrolled": true
@@ -390,12 +370,23 @@
       "Diagrama de Pareto para as quantidades de terremoto por dia\n",
       "Os dias são todos do mês de outubro de 2016\n"
      ]
+    },
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAikAAAFkCAYAAADlvasxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz\nAAAPYQAAD2EBqD+naQAAIABJREFUeJzt3Xu4VWW5/vHvLQoqaRqm5PaXhzxkpVgaZuYpTcsDqZi6\ngEjNU4KSstM8pG6tram4MZHC7SFJIkBRNBU0FVLMEymUIHsTmCIHRdyoKCjy/P54BzmZrvOac42x\n1ro/1zUvmGOMOefDOsx58453PK8iAjMzM7OiWSfvAszMzMxq45BiZmZmheSQYmZmZoXkkGJmZmaF\n5JBiZmZmheSQYmZmZoXkkGJmZmaF5JBiZmZmheSQYmZmZoXkkGJmZmaF1KSQIul0SdMlLctuT0j6\ndsn+LST9TtJCSe9Imibp6MqXbWZmZg2RtI+keyS9Kmm1pF61HHOZpAWS3pX0kKTty/ZvKmlU9rn/\npqSbJHUt2b+1pCnZ5/5kSZ8te/wfJR3VnPqbOpLyCnAesHt2ewSYIGnnbP/vgB2Aw4EvAeOBsZJ6\nNKc4MzMza5GuwPPAAOBji/VJOg8YCJwG9ASWA5MkdS457PfAzsCBwGHAvsCIkv1DgPlAD2ARcE3J\n8x8PrIqIu5pTvFq6wKCkN4B/j4hbJb0NnB4Ro0r2LwHOjYhbWvRCZmZm1mySVgNHRsQ9JdsWAFdH\nxH9l9zcGFgM/iIix2SDEC8DuEfFcdswhwP3Av0XEIkkvAGdHxIPZ2ZWrI2IXSZsAzwD7R8Srzam5\n2XNSJK2TJaQNgSeyzVOB47KhIWX7uwCTm/s6ZmZmVnmStgW6Aw+v2RYRbwFPAXtlm74GvLkmoGT+\nBKwG9szuTwcOkiTgEGBGtv1q4FfNDSgA6zb1AZK+BPwFWB94GzgqImZnu48DxgBvAKtIw0ZHRcTc\nep5ve+DHpH/UO02tx8zMrAP7BLArMDQi5jTxsd1Jp4AWl21fnO1bc8xrpTsj4kNJS0uO+XfS6Z95\npM/y0yTtm9X1E0ljga8ADwJnRcSqxhbY5JACvEg677QJ0BsYKWnfiHgR+DnwSeCbpKByJDBO0jci\n4oU6nu/HpHNlZmZm1nwDK/Q8opb5K3UdExELgCP+tSPNZ3kQ+D7wM2AZsBMwiTT35YbGFtLkkJIl\noDUjI3+V1BMYJOlqUtj4QhZYAP6WpakBwBl1POUMgB/96EfsvffeTS2nVkOGDGHw4MEVea5KKmpd\n4Nqaq6i1FbUucG3NVdTailoXtH5tb765LnPnrs8//rFB9uf6vPde+pjt3n0ln/vce3zucyvYbrv3\nuPvuq/j3fz+rxa85depUfv3rX8NHp1iaYhEpbGzB2qMpmwPPlRyzeemDJHUCNuXjIzBrXARMjIjn\nJd0MXJiNvowHDqAJIYWIaNGNdC7rFtLVPKuBncr2TwR+U8/j+wBx++23R6UcccQRFXuuSipqXRGu\nrbmKWltR64pwbc1V1NqKWldEdWtbtizi4Ycjrrwy4uijI7baKgLSrXv3iF69In7+84gHH4xYurR6\ntd1+++1BGtHoEw1/Xq8GepVtW0Ca9Lrm/sbAe8D3svufBz4EvlxyzMGkKR3da3mNnYHZwAbZ/eeB\nI7K/DwLGN1Rn6a1JIymSfgE8QLoUeSOgL7BfVvCLwBxghKSfkE73HAUcRLpkyczMrM15/32YMQOe\nfvqj24svpkjyiU/AV78KfftCz57p9m//BlLeVSdZP5PtSSMmANtlbUGWRsQrwFDgIklzgJeAy0mX\nE08AiIgXJU0C/lvSj4DOwPXA6IhYVMtLjgB+HBHvZfenAqdI+l+gP+ly5kZr6umeLYCRwGdI55hm\nAAdHxCMAkr4DXAncQ5rMMwfoHxGTmvg6ZmZmrW71avjf/01B5Jln0p/PPZeCyrrrQo8esP/+cO65\nKZDstBN06pR31fXaA3iUNNoSpJ4mALcBJ0XEVZI2JIWLTYDHgO9ExPslz9EHGMZHV/XcQRoVWYuk\nU4FFEfFAyeZLScHkSdIgR+NP9dDEkBIRJzew/x/A95rynGZmZnlZuHDtEZJnnoFly9K+HXdMQaRv\n3zRasttusP76+dbbVBExhQbajUTEpaQwUdf+/wP6NeK1bgRuLNv2OvCtRpRaq+Zc3VN4NTU1eZdQ\nq6LWBa6tuYpaW1HrAtfWXEWtrah1wcdre+stePbZj0ZInn4a5s9P+7bYAvbcE37ykxRM9tgDNt20\n9Wqz2rW442yLC5D6AKNuv/12+vbtm2stZmbWPnzwAUyfXvc8kj32+GgOSc+esNVWxZlH0hSjRo2i\nX79+AH0joknzPdqCdjmSYmZmHdOCBXDjjTBiBCxa1GbnkVjGIcXMzNq0CHj8cRg2DMaPhy5d4Pvf\nh379YPfd2948EvuIQ4qZmbVJy5fD73+fwsmMGbDDDjBkCPzgB/DJT+ZdnVWCQ4qZmbUpc+bA8OFw\n663pSpzDD4err4aDDoJ1mr1srhWRQ4qZmRXe6tUwcWIaNXngAfjUp+DUU+H002HbbfOuzqrFIcXM\nzApr6dI0YjJ8OMydC1/5CtxyCxx/PGywQd7VWbU5pJiZWeE8/zzccAOMGgWrVsGxx6a/77ln27xU\n2JrHIcXMzArh/ffT1TnDhsHUqWkNnAsugFNOSc3WrONxSDEzs1yV9zbZf3+44w7o1QvWWy/v6ixP\nDilmZtbq6uptMmAAfOlLeVdnReGQYmZmrca9TawpmnRFuaTTJU2XtCy7PSHp2yX7J0taXXL7UNLw\nypdtZmZtyZw5cM45aY2c006DrbeGSZPSejpnneWAYrVr6kjKK8B5wJzs/gnABEm7RcQsIEjLNP8M\nWDP/+t0K1GlmZm2Me5tYSzUppETEfWWbLpL0I+BrwKxs27sR8XolijMzs7antt4mt94Kxx3n3ibW\nNM2ekyJpHeBYYEPgiZJdfSV9H1gE3AtcHhHvtahKMzMrPPc2sUprckiR9CXgL8D6wNvAURExO9s9\nCvgnsADYFbgK2BE4piLVmplZodTW2+TCC+Hkk93bxFquOSMpLwI9gE2A3sBISftGxIsRcVPJcS9I\nWgT8SdK2ETGvAvWamVkB1NXb5LvfhXV93ahVSJN/lCJiFTA3u/tXST2BQcCPajn8KdIE2u2BekPK\nkCFDGDNmzFrbampqqKmpaWqJZmZWBe5tYq2tEnl3HaBLHfu+TLriZ2FDTzJ48GD69u1bgXLMzKyS\nynub7Lije5tY62hSSJH0C+AB0qXIGwF9gf2AgyVtB/QB7gfeIJ0SuhaYEhF/r2TRZmZWfXPmpCt0\nbr0Vli2DI46Aq6+Ggw6CdZrUZcuseZo6krIFMBL4DLAMmAEcHBGPSNoKOIh06qcrKciMA35RuXLN\nzKya3NvEiqSpfVJOrmfffGD/lhZkZmatz71NrIg8B9vMrANzbxMrMocUM7MOxr1NrK1wSDEz6yDc\n28TaGv9Ympm1Y7X1NunfH844w71NrPgcUszM2iH3NrH2wCHFzKwdcW8Ta08cUszM2jj3NrH2yiHF\nzKyNcm8Ta+8cUszM2hj3NrGOwiHFzKwNcG8T64gcUszMCsy9Tawj84+4mVnBRKTRkmHD4M47U2+T\n738fBgxwbxPrWBxSzMwKory3yQ47uLeJdWwOKWZmOZszB379a7jlltTb5PDD3dvEDBxSzMxyUdrb\nZOJE2HRT9zYxK+eQYmbWit5886PeJv/4R+ptcvPNcPzx7m1iVs4hxcysFUyfnkZNSnub3H67e5uY\n1cchxcysSt5/H+66K4WTxx9PvU0uuABOOcW9TcwawyHFzKzC6upt0qsXrLde3tWZtR0OKWZmFeDe\nJmaV55BiZtYC7m1iVj0OKWZmzeDeJmbV55BiZtZI7m1i1rocUszMGuDeJmb5cEgxM6uDe5uY5csh\nxcyshHubmBWHQ4qZGbBwYepr4t4mZsXhOehm1qGtWgXXXAOf+1z688gj4W9/g0cfhd69HVCsbZO0\njqTLJc2V9K6kOZIuquW4yyQtyI55SNL2Jfs6S/qdpGWSXpR0YNljz5V0XTXq90iKmXVYzz6bTuNM\nnw5nnQWXXgqbbJJ3VWYV9VPgNKA/MBPYA/itpP+LiGEAks4DBgI/AOYBPwcmSdo5It7PHv9lYE/g\nMOD3wBbZY7cFTgJ2r0bxHkkxsw7nnXfg7LPTBNgIeOopGDrUAcXapb2ACRExMSJejojxwINAz5Jj\nBgGXR8S9EfF3UqDZEjgy2/954J6IeBG4Afi0pG7ZvuHAuRGxvBrFNymkSDpd0vRsyGeZpCckfbtk\nfxdJN0haIultSXdI2rzyZZuZNc9998EXv5jmnlx5JTzzDHz1q3lXZVY1TwAHStoBQFIPYG/g/uz+\ntkB34OE1D4iIt4CnSAEHYDrwDUnrA98GFkTEG5L6Ae9FxD3VKr6pp3teAc4D5mT3TwAmSNotImYB\nQ4HvAL2Bt0iJ605gn4pUa2bWTAsXwqBBMG4cHHIITJ7sBmzWIVwJbAy8KOlD0uDEhRHxh2x/dyCA\nxWWPW5ztA7gF2JV0uuh14HuSNgUuBfaX9HPgOFI2OCkiFlaq+CaFlIi4r2zTRZJ+BHxN0quk81LH\nR8QUAEknArMk9YyIpytSsZlZE6xeDTfdBOeeC507p54nNTXuc2Jtz+jRoxk9evRa2+bPn9/Qw44D\n+gDHk0LGbsB1khZExO/qeZxI4YWIWEWas/LRTulW4DrSXJVepBBzHnA9cEzj/kUNa/bEWUnrAMcC\nGwJ/IU2aWZe1h4xmS3qZNGTkkGJmrWrmzNS2fupUOOkkuOoq6Nat4ceZFVFNTQ01NTVrbRs1ahT9\n+vWr72FXAf8ZEeOy+y9I2gY4H/gdsIgUSLZg7dGUzYHnantCSd8EdiYNTFwD3B8R70kaCwxo2r+q\nfk2eOCvpS5LeBlaSJswclU2m6Q68n53LKlU6ZGRmVnUrVsAll8Buu8Frr8Ejj6Q29g4o1gFtSDYi\nUmI12ed/RMwjBZV/XVYsaWPSlTxPlD+ZpC7AMODUiAigE7DmQv3O2f2Kac5IyotAD2AT0tyTkZL2\nref4fw0ZmZlV25QpafRk3jz46U9Tt9j118+7KrPc3AtcKOkV4AXgK8DZwE0lxwwlTd+YA7wEXA7M\nBybU8nyXAH+MiBnZ/anAVZJ+SzolNLWSxTc5pGTnpuZmd/8qqSfp8qWxQGdJG5eNpmzOxyfkfMyQ\nIUMYM2bMWttqG9oyM6vN0qVp3snNN8PXvw7jx6ereMw6uIGk0HED6fN4AfDrbBsAEXGVpA2BEaQB\niMeA72Q9Uv5F0hdJgxO7lWy+A9gP+DMwmzT/pWIq0cxtHaALMA1YRRoyugtA0o7AZ0lzVuo1ePBg\n+vbtW4FyzKwjiYAxY9KVOytWwG9+kxq0reMuUGZk/UvOyW71HXcp6Wqd+o55AdipbFuQgtDAWh/U\nQk0KKZJ+ATxAuhR5I6AvKUEdHBFvSboZuFbSm8DbwK+Aqb6yx8yqYd48OOMMmDgRjjkGrrsOttwy\n76rMrFKaOpKyBTAS+AywDJhBCiiPZPvPBj4kDf90ASZS4Zm+ZmarVqUOsZdckibD3nMPHHFE3lWZ\nWaU1tU/KyQ3sXwmcmd3MzCru2WfTxNjnn0/r7Vx+OWy0Ud5VmVk1+KytmbUJpevtrF790Xo7Dihm\n7ZdXQTazwrvvvjT35PXX03o7P/4xrLdew48zs7bNIcXMCmvRonTVztixXm/HrCPy6R4zK5zVq+HG\nG+Hzn4dHH03r7TzwgAOKWUfjkGJmhTJrFuy3H5x2GvTuDS++CH36eEFAs47IIcXMCmHNejs9eqT1\ndh59NHWP/dSn8q7MzPLiOSlmlrspU9LIydy5Xm/HzD7ikRQzy83SpXDyybD//rDZZqn3yWWXOaCY\nWeKRFDNrdaXr7axc6fV2zKx2fksws1b10ktw6KFQU5MmyM6alU71OKCYWTm/LZhZq1i1CoYMgS9+\nEV54Ia23M3YsfOYzeVdmZkXlkGJmVffss9CzJ5x7bjqt88ILXhDQzBrmkGJmVfPOO3DOOR+tt/Pk\nk15vx8wazxNnzawqvN6OmbWUQ4qZVZTX2zGzSvHpHjOriPL1dn7/e6+3Y2Yt45BiZi1W23o7NTVe\nb8fMWsYhxcyazevtmFk1eU6KmTWL19sxs2rzSIqZNYnX2zGz1uKRFDNrlNL1dlas8Ho7ZlZ9fnsx\nswaVrrez775eb8fMWoffYsysTqtWwTXXrL3ezrhxsOWWeVdmZh2BQ4qZ1crr7ZhZ3hxSzGwt5evt\nPPWU19sxs3x44qyZ/YvX2zGzInFIMTOvt2NmheTTPWYdWPl6O6NGeb0dMysOhxSzDqp8vZ1Zs6BP\nH6+3Y2bF4ZBi1sGUrrezeDE88khab6dbt7wrMzNbW5NCiqTzJT0t6S1JiyXdJWnHsmMmS1pdcvtQ\n0vDKlm1mzTFlCuy2G1xxRVpvZ8YMOOCAvKsyM6tdU0dS9gGuB/YEDgLWAx6UtEHJMQHcCGwBdAc+\nA5zb8lLNrLlK19vp1g2ee87r7ZhZ8TXp6p6IOLT0vqQTgNeA3YHHS3a9GxGvt7g6M2sRr7djZm1Z\nS9+qNiGNnCwt295X0uuS/ibpP8tGWsysFcyb5/V2zKxta3afFEkChgKPR8TMkl2jgH8CC4BdgauA\nHYFjWlCnmTXSqlVw3XVw8cXwqU/BhAnQq1feVZmZNV1LmrkNB74A7F26MSJuKrn7gqRFwJ8kbRsR\n8+p6siFDhjBmzJi1ttXU1FBTU9OCEs06lmefhVNPheefh7POgssvdzt7M2u7mhVSJA0DDgX2iYiF\nDRz+FCBge6DOkDJ48GD69u3bnHLMOrx33oGf/Qx+9SvYZRd48sm0OKCZWVvW5JCSBZTvAvtFxMuN\neMiXSfNWGgozZtYMXm/HzNqrJoWUrN9JDdALWC5pi2zXsohYIWk7oA9wP/AG0AO4FpgSEX+vXNlm\nVrrezsEHp7b2222Xd1VmZpXT1JGU00mjIpPLtp8IjATeJ/VPGQR0BV4BxgG/aFGVZvYvq1fDTTfB\nuedC585pvZ2aGrezN7P2p6l9Uuq9eDEi5gP7t6QgM6vbzJlpYuzUqXDiiXD11W5nb2btlzsmmLUB\na9bb2W03eO21tN7OLbc4oJhZ+9aSS5DNrBVMmZKasM2dm9bbueACt7M3s47BIylmBeX1dsyso/NI\nilnBlK+38+tfp3kobmdvZh2N3/bMCqS29XZOP90Bxcw6Jr/1mRXAqlVwzTXwpS/BCy/APffAuHGw\n5ZZ5V2Zmlh+HFLOcPftsamF/7rlwyikppBxxRN5VmZnlzyHFLCfvvANnnw177pkatD31FAwd6gUB\nzayyJG0p6XeSlkh6V9J0SV8pO+YySQuy/Q9J2r5kX+fs8cskvSjpwLLHnivpumrU7omzZjnwejtm\n1hokbQJMBR4GDgGWADsAb5Yccx4wEPgBaSHgnwOTJO0cEe8Dp5HW4dsTOAz4PbBF9thtgZOA3atR\nv0OKWStauDBdtTNuHBxyCEyeDNtum3dVZtaO/RR4OSJOLtn2z7JjBgGXR8S9AJL6A4uBI4GxwOeB\neyLiRUkvAVdL6hYRbwDDgXMjYnk1ivfpHrNWsHo13Hgj7LxzCiajRsEDDzigmFnVHQE8K2mspMWS\n/irpX4ElGwnpThppASAi3gKeAvbKNk0HviFpfeDbwIKIeENSP+C9iLinWsU7pJhV2cyZ6XLi006D\n3r3TZcV9+nhBQDNrFdsBPwJmAwcDvwF+lQUMSAElSCMnpRZn+wBuAWYAM4Hzge9J2hS4FDhL0s8l\n/a+kByR9ppLF+3SPWZWsWAFXXJFu22yT1ts54IC8qzKztmr06NGMHj16rW3z589v6GHrAE9HxM+y\n+9MlfZEUXG6v53EihRciYhVpzspHO6VbgetIc1V6AbsC5wHXA8c04p/TKA4pZlUwZUrqEjtvntfb\nMbPKqKmpoaamZq1to0aNol+/fnU8AoCFwKyybbOAo7O/LyIFki1YezRlc+C52p5Q0jeBnUkTZq8B\n7o+I9ySNBQY06h/TSD7dY1ZBpevtbLaZ19sxs9xNBXYq27YT2eTZiJhHCir/uqxY0sakK3meKH8y\nSV2AYcCpERFAJ2DNtYmds/sV45BiVgERMHp0mhg7bhz85jfw2GPwxS/mXZmZdXD/BXxN0vmSPiep\nD3AyKWisMRS4SNIRknYBRgLzgQm1PN8lwB8jYkZ2fypwdPa4gdn9ivHpHrMWmjcv9TyZOBGOOQau\nu87t7M2sGCLiWUlHAVcCPyP1QRkUEX8oOeYqSRsCI4BNgMeA72Q9Uv4lm8vSG9itZPMdwH7An0mT\nc/tUsn6HFLNmWrUqdYi95BLo1i2tt+N29mZWNBFxP3B/A8dcSrpap75jXqDs1FF2ymcgZRNrK8Wn\ne8yawevtmJlVn0OKWRN4vR0zs9bj0z1mjeT1dszMWpdDilkDvN6OmVk+fLrHrA5eb8fMLF8OKWa1\n8Ho7Zmb5c0gxK7FiRbqkeLfd4LXX0no7N9+cLjE2M7PW5TkpZhmvt2NmViweSbEOz+vtmJkVk0dS\nrMOKgD/8IV1KvGJFWm/nlFNgHUd3M7NC8NuxdUjz5sGhh6bJsPvumybGnnaaA4qZWZH4Ldk6lFWr\n4Jpr0urEL7yQ1tsZN84LApqZFVGTQkq21PPTkt6StFjSXZJ2LDumi6QbJC2R9LakOyRtXtmyzZru\n2Wfhq19N6+2ceqrX2zEzK7qmjqTsA1wP7AkcBKwHPChpg5JjhgKHkZZz3hfYEriz5aWaNU/pejsR\nXm/HzKytaNLE2Yg4tPS+pBOA14DdgcclbQycBBwfEVOyY04EZknqGRFPV6Rqs0b64x9hwACvt2Nm\n1ha1dE7KJkAAS7P7u5OCz8NrDoiI2cDLwF4tfC2zRlu4EI49Np3O2XnndGrnJz9xQDEza0uaHVIk\niXRq5/GImJlt7g68HxFvlR2+ONtnVlVeb8fMrP1oSZ+U4cAXgG804liRRlzqNGTIEMaMGbPWtpqa\nGmpqappdoHUsM2emCbFTp8JJJ8FVV7mdvZlZW9askCJpGHAosE9ELCjZtQjoLGnjstGUzUmjKXUa\nPHgwffv2bU451sGtWAH/+Z9pzsk226T1dg44IO+qzMyspZp8uicLKN8FDoiIl8t2TwNWAQeWHL8j\n8FngLy2o06xWU6ZAjx4poPz0pzBjhgOKmVl70aSRFEnDgRqgF7Bc0hbZrmURsSIi3pJ0M3CtpDeB\nt4FfAVN9ZY9V0tKlaSLsLbfA178O48enBm1mZtZ+NPV0z+mkuSWTy7afCIzM/n428CFwB9AFmAgM\naH6JZh/xejtmZh1HU/ukNPhREBErgTOzm1nFzJsHZ5wBEyfCMcfAdde5nb2ZWXvm/39a4Xm9HTOz\njskhxQpt2jSvt2Nm1lE5pFhh3XYb7LWX19sxM+uoHFKscFavhvPPhxNOgP794emn02iKmZl1LC3p\nOGtWccuXp2By111pHso554CUd1VmZpYHhxQrjFdfhV69YPZsuPvu9HczM+u4HFKsEKZNS6GkU6e0\n9k6PHnlXZGZmefOcFMvd+PGwzz6w1VZp/okDipmZgUOK5SgCrrgCevdOlxVPngzdu+ddlZmZFYVD\niuVi5cp09c4FF8DFF8Po0bDBBnlXZWZmReI5KdbqXn8djj4annkGRo2CPn3yrsjMzIrIIcVa1cyZ\ncPjh6VLjRx9NzdrMzMxq49M91momTUqhpGvXNEHWAcXMzOrjkGKtYtgwOPTQdBXPE0/A1lvnXZGZ\nmRWdQ4pV1apVMHAgnHkmDBoEEyZ4/R0zM2scz0mxqlm2DI49Fh55BEaMSKsYm5mZNZZDilXF3Llp\nguzChTBxIhx4YN4VmZlZW+PTPVZxjz0GPXvCBx/Ak086oJiZWfM4pFhF3XZbCiW77JICyk475V2R\nmZm1VQ4pVhGrV8P556cusv37p8uNu3XLuyozM2vLPCfFWmz58hRM7roLrrkGzjkHpLyrMjOzts4h\nxVrk1VehVy+YPRvuvjv93czMrBIcUqzZpk1LoaRTJ5g6FXr0yLsiMzNrTzwnxZpl/PjUPXarrVKL\newcUMzOrNIcUa5IIuOIK6N0bjjgCJk+G7t3zrsrMzNojhxRrtJUr09U7F1wAF18Mo0fDBhvkXZWZ\nmbVXnpNijfL663D00fDMMzBqFPTpk3dFZmbW3jmkWINmzkwt7pcvh0cfhb32yrsiMzPrCHy6x+o1\naVIKJV27pgmyDihmZm2TpPMlrZZ0bcm2LpJukLRE0tuS7pC0ecn+TSXdm+2bJqlH2XPeIOnsatXs\nkGJ1GjYMDj00XcXzxBOw9dZ5V2RmZs0h6avAKcD0sl1DgcOA3sC+wJbA+JL9FwJdgS8DU4CbSp5z\nL+Cr2XNURZNDiqR9JN0j6dUskfUq239rtr30dn/lSrZqW7UKBg6EM8+EQYNgwgTYaKO8qzIzs+aQ\n9AngduBk4P9Ktm8MnAScHRFTIuI54ETg65J6ZoftDPwhIuYANwKfzx67LjAcOC0iolq1N2ckpSvw\nPDAAqKuwB4AtgO7ZraZZ1VmrW7YMDjsMRoxIt2uvTc3azMyszboBuDciHinbvgdpburDazZExGzg\nZWDNyf3pwDcldQK+DczItv8UeDQLNlXT5ImzETERmAgg1blCy8qIeL0lhVnrmzs3TZBduBAmTkyr\nGZuZWdsl6XhgN1IgKbcF8H5EvFW2fTFpgAHgSuDXwD+AecBJknYA+gF7SfoN8C3gGeCUiHi7kvVX\n6+qe/SUtBt4EHgEuioilVXotq4DHHoOjjoJNN4Unn4Sddsq7IjMzKzV69GhGjx691rb58+fXebyk\nrUjzRb4VER804aVEdqYkCzB9y573YeAnpKCyDbAjaa7Kxdn2iqlGSHkAuJOUuD4HXAHcL2mvap63\nsua77TY45RTYe2+44w7o1i3viszMrFxNTQ01NWvPnhg1ahT9+vWr6yG7A58GppWc+egE7CtpIOn0\nTRdJG5eNpmxOGk35GEknAW9GxL2S7gTujogPJY0D/qO5/7a6VDykRMTYkrsvSPobaZhof+DRuh43\nZMgQxoxNYRALAAAYnUlEQVQZs9a22r4hVjmrV8OFF8KVV8IPfwjDh0PnznlXZWZmFfInYJeybb8F\nZpFO47wKfAAcCNwFIGlH4LPAX8qfTNKngYuAr2ebOgHrZX9fL7tfUVVv5hYR8yQtAbannpAyePBg\n+vbtW9duq7Dly6F/f7jrLrjmGjjnHKhzhpGZmbU5EbEcmFm6TdJy4I2ImJXdvxm4VtKbwNvAr4Cp\nEfF0LU85FLg6IhZl96cC35f0EHBqdr+iqh5SsnNi3YCF1X4ta5xXX4VevWD2bLj77vR3MzPrEMqn\nXZwNfAjcAXQhXRgzoPxBkg4GtouI0tGEYaQJuU8CT1GE0z2SupJGRdb8v3u7rAPd0ux2CWlOyqLs\nuF8C/wNMqkTB1jLTpqVQ0qkTTJ0KPXo0/BgzM2sfIuKbZfdXAmdmt/oe9yDwYNm294DjKl1jqeb0\nSdkDeA6YRkpkQ4C/khLUh8CuwARgNvDfpMuS9m3izGKrgvHjU/fYrbZKLe4dUMzMrMia0ydlCvWH\nm283vxyrhog0OfaCC+DYY+G3v4UNNsi7KjMzs/p57Z52buVKOOGEFFAuvhhGj3ZAMTOztqHqE2ct\nP6+/DkcfDc88A6NGQZ8+eVdkZmbWeA4p7dTMmanF/fLl8OijsNdeDT/GzMysSHy6px2aNCmFkq5d\n0wRZBxQzM2uLHFLamWHD4NBD01U8TzwBW2+dd0VmZmbN45DSTqxaBQMHwplnwqBBMGECbLRR3lWZ\nmZk1n+ektAPLlqVLix95BEaMgFNPzbsiMzOzlnNIaePmzk0TZBcuhIkT4cAD867IzMysMny6pw17\n7DHo2RM++ACefNIBxczM2heHlDbqtttSKNlllxRQdtop74rMzMwqyyGljVm9Gs4/P3WR7d8/XW7c\nrVveVZmZmVWe56S0IcuXp2By111wzTVwzjkgNfw4MzOztsghpY149VXo1Qtmz4a7705/NzMza88c\nUtqAadNSKOnUCaZOhR498q7IzMys+jwnpeDGj0/dY7faKrW4d0AxM7OOwiGloCLgiiugd2844giY\nPBm6d8+7KjMzs9bjkFJAK1emq3cuuAAuvhhGj4YNNsi7KjMzs9blOSkF8/rrcPTR8MwzMGoU9OmT\nd0VmZmb5cEgpkJkzU4v75cvh0Udhr73yrsjMzCw/Pt1TEJMmpVDStWuaIOuAYmZmHZ1DSgEMGwaH\nHpqu4nniCdh667wrMjMzy59DSo5WrYKBA+HMM2HQIJgwATbaKO+qzMzMisFzUnKybBkceyw88giM\nGAGnnpp3RWZmZsXikJKDuXPTBNmFC2HixLSasZmZma3Np3ta2WOPQc+e8MEH8OSTDihmZmZ1cUhp\nRbfdlkLJLrukgLLTTnlXZGZmVlwOKa3k6qtTF9n+/dPlxt265V2RmZlZsTmktILhw+Hcc+HCC+G/\n/xs6d867IjMzs+JzSKmykSNhwAD48Y/h8stByrsiMzOztqHJIUXSPpLukfSqpNWSetVyzGWSFkh6\nV9JDkravTLlty513woknwsknw7XXOqCYmZk1RXNGUroCzwMDgCjfKek8YCBwGtATWA5MktShTnI8\n8ADU1MBxx8FvfuOAYmZm1lRN7pMSEROBiQBSrR+9g4DLI+Le7Jj+wGLgSGBs80ttO6ZMSSsZf+c7\n6YqeTp3yrsjMzKztqeicFEnbAt2Bh9dsi4i3gKeADrFk3lNPpUZte+8NY8bAeuvlXZGZmVnbVOmJ\ns91Jp4AWl21fnO1r12bMSKMnPXqkdXjWXz/viszMzNqu1rq6R9Qyf6U9mT0bvvUt2HZbuO8+6No1\n74rMzMzatkqv3bOIFEi2YO3RlM2B5+p74JAhQxgzZsxa22pqaqipqalwiZX30ktw0EGw2WapUdsn\nP5l3RWZmZm1fRUNKRMyTtAg4EJgBIGljYE/ghvoeO3jwYPr27VvJclrFggUpoHTpAg89lIKKmZmZ\ntVyTQ4qkrsD2pBETgO0k9QCWRsQrwFDgIklzgJeAy4H5wISKVFwgS5akUzwrV6aFA7fcMu+KzMzM\n2o/mjKTsATxKmmMSwJBs+23ASRFxlaQNgRHAJsBjwHci4v0K1FsYy5bBIYekoPLnP8M22+RdkZmZ\nWfvSnD4pU2hgwm1EXApc2rySim/5cjjsMJg3DyZP9mrGZmZm1VDpibPt3ooVcOSRMH06PPww7Lpr\n3hWZmZm1Tw4pTfDBB6nN/eOPw8SJ0LNn3hWZmZm1Xw4pjfThh/CDH6Q1eSZMgP32y7siMzOz9s0h\npREi4PTTU5v7sWNTV1kzMzOrLoeUBkTAOefATTelxQJ79867IjMzs46htdrit1mXXAJDh8INN0D/\n/nlXY2Zm1nE4pNTj6qvh8svhl7+EM87IuxozM7OOxSGlDsOHw7nnwkUXpT/NzMysdTmk1GLkSBgw\nAAYNgssuy7saMzOzjskhpcydd8KJJ8IPfwj/9V8gNfwYMzOzIpJ0vqSnJb0labGkuyTtWHZMF0k3\nSFoi6W1Jd0javGT/ppLuzfZNy9brK338DZLOrkb9DiklHngAamrg2GNhxAgHFDMza/P2Aa4H9gQO\nAtYDHpS0QckxQ4HDgN7AvsCWwPiS/RcCXYEvA1OAm9bskLQX8NXsOSrOlyBnpkyBo49OPVBGjoRO\nnfKuyMzMrGUi4tDS+5JOAF4Ddgcel7QxcBJwfLY2H5JOBGZJ6hkRTwM7A3+IiDmSbgROyY5bFxhO\nWlw4qlG/R1KAp5+Gww+HvfdODdvWWy/viszMzKpiEyCApdn93UkDFg+vOSAiZgMvA3tlm6YD35TU\nCfg2MCPb/lPg0Yh4rlrFdviQMmMGfPvbaaHACRNg/fXzrsjMzKzyJIl0WubxiJiZbe4OvB8Rb5Ud\nvjjbB3Al8CHwD+C7wEmSdgD6AZdL+o2kf0j6g6SNKllzhz7dM3s2fOtbsM02cN990LVr3hWZmZnV\nbvTo0YwePXqtbfPnz2/KUwwHvgB8oxHHijTiQhZg+q61U3oY+AkpqGwD7Eiaq3Jxtr0iOmxIeekl\nOOgg6NYNJk2CTTbJuyIzM7O61dTUUFNTs9a2UaNG0a9fvwYfK2kYcCiwT0QsKNm1COgsaeOy0ZTN\nSaMptT3XScCbEXGvpDuBuyPiQ0njgP9o0j+qAR3ydM/ChSmgdO4Mf/oTfPrTeVdkZmZWHVlA+S5w\nQES8XLZ7GrAKOLDk+B2BzwJ/qeW5Pg1cBAzMNnUiXTFE9mdFLzvpcCMpS5akgLJyJTz2GGy5Zd4V\nmZmZVYek4UAN0AtYLmmLbNeyiFgREW9Juhm4VtKbwNvAr4Cp2ZU95YYCV0fEouz+VOD7kh4CTs3u\nV0yHCinLlsEhh6Sg8uc/p7koZmZm7djppLklk8u2nwiMzP5+Nmli7B1AF2AiMKD8iSQdDGwXEaXz\nU4YBewBPAk9R4dM9HSakLF8Ohx0Gc+fC5Mmw0055V2RmZlZdEdHgtI6IWAmcmd3qO+5B4MGybe8B\nx7Wkxvp0iJCyYgUceSRMn57moPTo0fBjzMzMLF/tPqR88AEcdxw8/nhqe7/nnnlXZGZmZo3RrkPK\nhx/CD36QwsmECbD//nlXZGZmZo3VbkNKBJx+empzP3ZsWpPHzMzM2o52GVIi4Jxz4Kab4Le/hd69\n867IzMzMmqpdNnO75BIYOhRuuCGd7jEzM7O2p02NpLz88sssWbKk3mNGjtyc667bijPPfJWvfW0x\nf/1r7cdtttlmfPazn61ClWZmZlYJbSakvPzyy+y0086sWPFuPUftSlpR+nKuv/5irr++7iPXX39D\nZs+e5aBiZmZWUG0mpCxZsiQLKLcDO9dz5GzgsOxWl1msWNGPJUuWOKSYmZkVVJsJKR/ZGfhK3kWY\nmZlZlVV84qykSyStLrvNrPTrmJmZWftWrZGUv5OWfVZ2f1WVXsfMzMzaqWqFlFUR8XqVntvMzMw6\ngGr1SdlB0quS/iHpdkn/r0qvY2ZmZu1UNULKk8AJwCHA6cC2wJ8lda3Ca5mZmVk7VfHTPRExqeTu\n3yU9DfwTOBa4tdKvVxSNaTTXWG40Z2Zm1gqXIEfEMkn/A2xf33FDhgxhzJgxa22rqamhpqammuVV\nROMazTWeG82ZmZm1QkiR9Angc8DI+o4bPHgwffv2rXY5VdH4RnON4UZzZmZmUIWQIulq4F7SKZ5/\nA/6DdAny6Eq/VvG40ZyZmVmlVGMkZSvg90A34HXgceBrEfFGFV7LzMzM2qlqTJwt/iQSMzMzK7xq\n9UkxMzMzaxGHFDMzMyukNrgKsjVFJfu3QGV7uLi3jJmZ1cchpR2rdP8WqFwPF/eWMTOzhjiktGOV\n7d8Clezh4t4yZmbWEIeUDqHI/VuKXJuZmeXJE2fNzMyskBxSzMzMrJAcUszMzKyQHFLMzMyskDxx\n1qwWRe7hUtTa3JPHzCrNIcWsTJF7uBS1NvfkMbNqcEgxK1PkHi5Frc09ecysGhxSzOpU5B4uRa2t\nqHVBsWszs9p44qyZmZkVkkOKmZmZFZJDipmZmRWSQ4qZmZkVkifOmpnlqMg9XIpaW5F78lhlOaSY\nmeWkyD1cilpbkXvyWOU5pJiZ5aTIPVyKWluRe/JY5TmkmJnlrsg9XIpaW1HrskryxFkzMzMrJIcU\nMzMzKySHFDMzMyskhxQzMzMrJE+cNTMzq5Ci9pZpqxxSzMzMKqCovWXaMocUMzOzCihqb5m2rJ3O\nSRmddwF1KGpd4Nqaq6i1FbUucG3NVdTailoX5Ffbmh4u9d1mN7C/Eo3q2r6qhRRJAyTNk/SepCcl\nfbVar/VxRf2lKWpd4Nqaq6i1FbUucG3NVdTailoXuLaP1PeZLOlaSW9I+qekPmWPO1bShFYttkRV\nQoqk44AhwCXAl4HpwCRJm1Xj9czMzKx29X0mSzoCOB44CDgPuEnSp7LHbQL8HDgjl8Kp3kjK2cCI\niBgZES8CpwPvAidV6fXMzMysdvV9Jn8emBwRz0XEH4C3gG2zx/0SGBYRr+ZRNFQhpEhaD9gdeHjN\ntogI4E/AXpV+PTMzM6tdIz6Tnwf2kLSJpN2B9YE5kr5BGnW5vvWr/kg1ru7ZDOgELC7bvhjYqZbj\nPwEwderUep903rx52d9uArZsoIT/IY1Q1WUBAPfffz+zZs1q4Lka1vjaGqqrsrVV9mtW5Nry+n4W\nuba2/P0scm3+WWt6XZWtzT9rayv57PxEHYfU+5kcEQ9JGgU8Qxpd6Z/9ORz4ATBA0kDgdeC0iJhZ\nT9EVpxSoKviE0meAV4G9IuKpku1XAd+IiK+XHT8MGFDRIszMzDqWGyJiYPnGpn4mZ/suBTYCfgs8\nCHwR6AUMjIg9qlJ9HaoxkrIE+BDYomz75nw8yQEMzf6cAbxThXrMzMzaq08Au/LRZ2m5Jn0mS/o8\nUEM61fNDYEpELJU0FrhF0iciotU+qyseUiLiA0nTgAOBewAkKbv/q1qOnwN8LP2ZmZlZyzT1MxkY\nAZwTEe9K6gSsl23vDASt3F+tWh1nrwVuy74wT5NmFm9IGjoyMzOz1tOoz2RJpwKLI+K+bNNU4BJJ\newKHAjMj4q1Wq5oqhZSIGJv1RLmMNMT0PHBIRLxejdczMzOz2jXmM1nS5sBPKbkKNyKekTQEuI90\naqh/qxZOFSbOmpmZmVVCO127x8zMzNo6hxQzMzMrpDYZUiSdL+lpSW9JWizpLkk7lh3TRdINkpZI\nelvSHdk5t7zrOkXSo5KWSVotaeNq1lT22vtIukfSq9lr9yrb31XSMEmvSHpX0guSTmvF+upbAGs7\nSeMlvZZ97f5Q7e9n9roNfc02l/TbbP9ySfdL2r7adTWyttWSPsz+LL0NLkBtl0iaJekdSUslPSSp\nZ7Xrakxt2TGXSVqQ/R481Brf00Z8zW6t5Xt5f7Xraqg2SetK+qWkGdn381VJtyn152gVDbx3bCHp\nd5IWZvVNk3R0K9XV4M9aybEjsmPOao3a2oo2GVKAfUitevckLYq0HvCgpA1KjhkKHAb0BvYltf+7\nswB1bQA8APyCdDlXa+pKmjA1oI7X/i/gYKAPaT2HocAwSYdXuzDVvwDWhqSGQquB/YGvA12Ae6td\nFw1/zSYA2wBHALsBLwN/Kvue51Vbd+Az2Z/dSet0rAbuKEBts7N9XwL2Bl4i/a50y7s2SeeR2iKc\nBvQElpN+FjvnWVfmAdLExzXf05oq17RGfbVtSPrZ/w/S7+5RpO7irbJybn3vHdkhvwN2AA4n/byN\nB8ZK6tEK5TXme4qkI0k/a7mtkVNYEdHmb6S2v6tJ3fMANgZWAkeVHLNTdkzPvOoq27cfqcHOxjl9\nzVYDvcq2/Q24sGzbs8BlrVDPk8B1JfcFzAfOBb4FfAB0Ldm/cfb1+2ZeXzPSG99q4PNldS8GTsr7\n+1nLMXcDDxXhZ62WYzbKjjsg79pI/cjPLrm/MfAecGzOdd0KjG/t718zv597ZL+fW7VCPXW+d2T3\n3wb6lj1mSVF+R4F/I/3nZmdgHnBW3t/jIt3a6khKuU1IKXVpdn930uXVpQsqzSb9ILTmIofldRXd\nE0AvSVsCSDqA9EE8qZovqoYXwOpC+jq+X/KwlWQBsJq1NWBNXSvXbMjqXkm+dX1MdmrsUNKiIoWS\nff9PA/6P9L/gPGvZljRCUfqz+BbwFMVYIHV/pVPJL0oaLulTeRdUhzXvff9XzRdpxHsHpF4fx0na\nVMnxpN/dydWsrTEkCRgJXBURLV9wqR1q8yEl+yYPBR6PjxY+6g68Hx9vOrM425dXXUV3JjALmC/p\nfeB+YEBE1L/6Y8vVtwBWd+AvpAWvrpK0gaSuwDWkn99WO+9dixdJwfcKpRVEO2enCrbKua7anEBa\ngv2unOv4F0mHSXobWAEMAr4VEXkH+u6kD9e6fhbz9ACpT8U3SSOM+wH3Z+81hSGpC3Al8Puofvv0\nht47AI4jdUt9g/QfiF+TRtnnVrm2xvgp6bNqWN6FFFWbDymklRq/QOPOzYrWmweypq7jW+n1KuEs\n0nyaw4GvAIOB4ZK+mVM9Iv3H6A3ge1ld7wBvkobgnyMNKeciIlYBRwM7kkbL3iH74MizrjqcCNwe\nEe83eGTreQToQfof70RgXMk8gqJpzfeOWkXE2Ij4Y0S8EBH3kH4fepLmaRWCpHWBcaSv1Rl5lsJH\n36+fA58khbvdSd1Xx0n6Yk61ASBpd9J77ol51lF01WqL3yqUVlA+FNgnIhaU7FoEdJa0cdloSl2L\nHFazroXVfr1KkLQ+aTLvdyNiYrb575K+DPw76QOlWhpcACsiHgJ2yIa3V0XEW5IWks7h5iYingO+\nImkjoHNEvCHpSdKy54UgaR9SkPpe3rWUioj3gLnZ7WlJ/0Na0OyXOZa1iPQBtwVrv1dsTgrFhRER\n8yQtAbYHHs27npKA8v9Ic8VaYxG6et87JG1HmrT6hYh4Mdv3N0n7ZtvzDFLfAD4NvFIyGNYJuFbS\njyNiu9wqK5A2O5KSBYHvkibavVy2exqwirSA0prjdwQ+Szp1kFddRbZediv/3+KHVPnnJCI+IH3P\nSr9faxbAeqLs2KVZQPkm6Rf8nmrW1lgR8XYWUHYgTRq8O++aSvwQmBYRf8+7kAasQ5orkJuImEcK\nKqU/ixuTRhifqOtxeZC0FdANyP0/QiUBZTvgwIh4szVetxHvHRuuObTsoVV/X2uEkaTVi3uU3BYA\nVwGH5FhXobTJkRRJw0mnd3oByyWtSdHLImJF9iF2MymRvkma3f0rYGpEPJ1XXdkxay4f3IH0P7Zd\ns/PyL1f7Fzuby7F99roA22WX4S2NiFckTQGulrQC+CdpGLk/8ONq1pWpdwEsSSeQ5su8TroEeShw\nbUT8bzWLasTX7Jisppf5aLn08RHxcK1P2Iq1ZcdsDBxD+nq2mvpqI80NuJAUMBeS5hUMJLUJGJdn\nbdnXbShwkaQ5pEujLyddLVLVS2ob+JotJV1ieycpRG1PGnH6H6o8sb0RtS3I6tqNdApqvZL3vqVZ\nkKimut47biVN3J0DjJD0E9LP3lGkFhGHVbmuxvysvVl2/AfAomq/r7UpeV9e1Jwb6aqOD2u59S85\npgupZ8kSUkgZB2xegLouqeO4/tWsLXvt/ep47Vuy/ZsDNwOvkHpDzAQGteL39QzSh8J7pBGvPUr2\nXUH6QFtBmrDaKnU14mt2JimgrCCderoUWLcItWXHnEKaK7NRa30fG6ot+928M/s5e48UAO4CvpJ3\nbSXHXEr68H2XFAK2z/lrtj5p3s6i7GdtLmkC6Kfz/poBW9eyb839fVupvvreOz5Hev9fSPoseA7o\nk/fXrY7j5+JLkNe6eYFBMzMzK6S8z8mZmZmZ1cohxczMzArJIcXMzMwKySHFzMzMCskhxczMzArJ\nIcXMzMwKySHFzMzMCskhxczMzArJIcXMzMwKySHFzMzMCskhxczMzArp/wOHiXl4Niz1cgAAAABJ\nRU5ErkJggg==\n",
+      "text/plain": [
+       "<matplotlib.figure.Figure at 0x7f73c72e4090>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
     }
    ],
    "source": [
     "dias = [data.strftime(\"%d\") for data in datas]\n",
     "print 'Diagrama de Pareto para as quantidades de terremoto por dia'\n",
-    "#pareto(ocorrencias,dias,data_kw={'width': 0.5,'color': 'b'})\n",
+    "pareto(ocorrencias,dias,data_kw={'width': 0.5,\n",
+    "    'color': 'b'})\n",
     "print \"Os dias são todos do mês de outubro de 2016\""
    ]
   },
@@ -789,7 +780,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 126,
    "metadata": {
     "collapsed": false
    },
@@ -798,7 +789,18 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "\"20/10\", \"21/10\", \"18/10\", \"19/10\", \"17/10\", \"13/10\", \"15/10\", \"14/10\", \"01/10\", \"29/10\", \"19/10\", \"12/10\", \"29/10\", \"28/10\", \"28/10\", \"16/10\", \"15/10\", \"02/10\", \"30/10\",\n"
+      "20/10\n",
+      "21/10\n",
+      "18/10\n",
+      "09/10\n",
+      "19/10\n",
+      "17/10\n",
+      "13/10\n",
+      "10/10\n",
+      "15/10\n",
+      "12/10\n",
+      "08/10\n",
+      "14/10\n"
      ]
     }
    ],
@@ -808,7 +810,7 @@
     "    dia_occu.append([dias[i],ocorrencias[i]])\n",
     "my = sorted(dia_occu, key=lambda tup: tup[1], reverse=True)\n",
     "for item in my:\n",
-    "    print '\"'+ item[0] + '/10\",',"
+    "    print item[0] + '/10'"
    ]
   },
   {
@@ -818,9 +820,7 @@
     "collapsed": true
    },
    "outputs": [],
-   "source": [
-    "\"20/10\",\"21/10\",\"18/10\",\"09/10\",\"19/10\",\"17/10\",\"13/10\",\"10/10\",\"15/10\",\"12/10\",\"08/10\",\"14/10\","
-   ]
+   "source": []
   }
  ],
  "metadata": {
@@ -839,7 +839,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython2",
-   "version": "2.7.11"
+   "version": "2.7.12"
   }
  },
  "nbformat": 4,
