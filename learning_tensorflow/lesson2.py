@@ -13,26 +13,26 @@ with tf.Session() as session:
     for i in range(5):
         session.run(model)
         x = x + 1
-        # print(session.run(x))
+        print(session.run(y))
 
 # questão 4
-x = tf.Variable(0)
-model = tf.initialize_all_variables()
-with tf.Session() as session:
-    session.run(model)
-    for i in range(5):
-        x = x + np.random.randint(1000)
-        # print 'x é ', session.run(x)
-        # print 'media até aqui é', session.run(x)/(i + 1)
-
-# questão 5
-x = tf.constant(35, name='x')
-print(x)
-y = tf.Variable(x + 5, name='y')
-
-with tf.Session() as session:
-    merged = tf.merge_all_summaries()
-    writer = tf.train.SummaryWriter("/tmp/basic", session.graph_def)
-    model = tf.initialize_all_variables()
-    session.run(model)
-    print(session.run(y))
+# x = tf.Variable(0)
+# model = tf.initialize_all_variables()
+# with tf.Session() as session:
+#     session.run(model)
+#     for i in range(5):
+#         x = x + np.random.randint(1000)
+#         # print 'x é ', session.run(x)
+#         # print 'media até aqui é', session.run(x)/(i + 1)
+#
+# # questão 5
+# x = tf.constant(35, name='x')
+# print(x)
+# y = tf.Variable(x + 5, name='y')
+#
+# with tf.Session() as session:
+#     merged = tf.merge_all_summaries()
+#     writer = tf.train.SummaryWriter("/tmp/basic", session.graph_def)
+#     model = tf.initialize_all_variables()
+#     session.run(model)
+#     print(session.run(y))
