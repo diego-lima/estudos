@@ -90,3 +90,37 @@ exigem fatores de empacotamento maiores por causa do tipo de ligação sei lá
 		-> NC = 4
 
 - tipo AmXp:
+	- m e/ou p são diferentes de 1
+	- m != p
+	- NC = 8 (semelhante a do CsCl, exceto pelo fato de que apenas metade das posições
+	  centrais no cubo estariam ocupadas por íons Ca2+
+
+- tipo AmBnXp
+	- mais de um tipo de cátion (A e B)
+	- Perovskita caso m = n
+		-> perovskita CFC
+		-> NC do cátion A = 12
+		-> NC do cátion B = 6
+		-> NC do ânion X = 6
+	- Espinélio caso m != n
+		-> lembra CFC
+		-> NC: 4 para A e 6 para B
+
+*RESUMO DAS RELAÇÕES NC -> SÍTIO OCUPADO
+4  -> tetraédrico
+6  -> octaédrico
+8  -> cúbico
+12 -> cuboctaédrico
+
+> FATOR de empacotamento para cerâmicas
+- F.E.I = ( volume dos cátions + volume dos ânions ) / volume da célula
+
+??? identificar parâmetros de rede a partir dos raios dos átomos 
+
+>DENSIDADE volumétrica
+
+- METAIS: (n * A) / (Vc * NA)
+- CERÂMICAS: ( nc*Ac + na*Aa ) / (Vc*Na)
+
+
+parei no slide 29 da aula 3
