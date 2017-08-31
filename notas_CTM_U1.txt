@@ -49,7 +49,7 @@
 	- a = 4R / sqrt(2)
 	- FEA = 74%
 
-- Hexagonal simples (HS)
+- Hexagonal compacta (HC)
 	- 6 átomos por célula unitária
 	- razão c/a ideal = 1.633 --> esferas uniformes empilhadas da maneira mais compacta possível
 	- a = 2R
@@ -83,11 +83,14 @@ exigem fatores de empacotamento maiores por causa do tipo de ligação sei lá
 -tipo AX:
 	- Sal-gema (NaCl): lembra uma CFC 
 		-> NC = 6
+		-> a = 2R(cloro) + 2R(sódio)
 	- Cloreto de césio(CsCl): lembra uma CCC
 		-> NC = 8
+		-> a = ( 2Rcloro + 2Rcésio ) / sqrt(3)
 	- Blenda de zinco ou esfalerita (ZnS): lembra uma CFC
 		-> Todos os átomos estão tetraedricamente coordenados
 		-> NC = 4
+		-> a = ( 2Rcloro + 2Rcésio ) / sqrt(2)
 
 - tipo AmXp:
 	- m e/ou p são diferentes de 1
@@ -123,4 +126,12 @@ exigem fatores de empacotamento maiores por causa do tipo de ligação sei lá
 - CERÂMICAS: ( nc*Ac + na*Aa ) / (Vc*Na)
 
 
-parei no slide 29 da aula 3
+>>Aula 4: arranjos moleculares (estrutura polimérica)
+
+>Principais Polímeros
+!! copiei no caderno porque preferi desenhando 
+
+
+
+
+
