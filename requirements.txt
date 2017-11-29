@@ -15,7 +15,7 @@ entrypoints==0.2.3
 enum34==1.1.6
 functools32==3.2.3.post2
 future==0.16.0
-gnureadline==6.3.3
+gnureadline
 html5lib==1.0b10
 idna==2.6
 ipykernel==4.2.2
@@ -41,8 +41,7 @@ path.py==8.1.2
 pathlib2==2.3.0
 pexpect==4.0.1
 pickleshare==0.5
-Pillow==3.0.0
-pkg-resources==0.0.0
+Pillow
 prompt-toolkit==1.0.15
 ptyprocess==0.5
 Pygments==2.0.2
