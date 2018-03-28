@@ -340,7 +340,22 @@ int ao_quadrado (const int x){
     return x*x;
 }
 
-void map(int (*op)(int), int *l, int tam){
+float dividir(float x){
+    // Uma outra opcao de funcao que define
+    // um certo comportamento
+    return ((float) x)/2;
+}
+
+/*
+O template serve para dizer que a funcao (*op)
+e de um tipo generico qualquer T. 
+Com isso, podemos fazer com que a funcao map
+seja capaz de receber funcoes com qualquer
+tipo de retorno. O mesmo vale para os outros
+parametros.
+*/
+template <class T>
+void map(T (*op)(T), T *l, int tam){
     // (*op) = um ponteiro de funcao
     // *l = alguma lista
     // tam = quantidade de elementos
@@ -348,7 +363,6 @@ void map(int (*op)(int), int *l, int tam){
     // vamos aplicar a funcao op na lista l
     // seja la qual for a funcao op,
     // seja la qual for a lista l.
-
     int i;
 
     for (i=0; i<tam; i++){
@@ -366,7 +380,7 @@ int main(){
 
     // Printar vetor
     for (i=0; i<tam; i++){
-		printf("%d\n", v[i]);
+        printf("%d\n", v[i]);
 	}    
     
 	
@@ -669,9 +683,43 @@ int main(){
 
 // 
 // QUESTAO 20
-// 
+//
 /*
-https://launchpad.net/ubuntu/+source/libgc
-https://launchpad.net/libgc
-doc/simple_example.html
+OBSERVACAO: para compilar esse codigo, por 
+algum motivo precisa rodar
+> g++ arquivo.cpp -lgc
+se nao, nao funciona colocar as bibliotecas
+do libgc. Aparentemente isso e resultado
+de uma mudanca no compilador, que possivelmente
+nao foi acompanhada pela biblioteca.
 */
+
+int main(){
+	float *v;
+	int tam, i;
+
+    // Inicializamos o coletor de lixo:
+    GC_INIT();
+
+	printf("Digite o tamanho do vetor q tu quer\n");
+	scanf ("%d", &tam);
+
+    // Ao inves de usar o malloc como usariamos
+    // normalmente, utilizamos o GC_MALLOC
+	// v = (float *) malloc(tam*sizeof(float));
+    v = (float *) GC_MALLOC(tam*sizeof(float));
+
+    // Ao usar o GC_MALLOC, o equivalente do free
+    // seria o GC_FREE. Contudo, especialmente para
+    // objetos pequenos,o codigo provavelmente vai ser mais
+    // rapido se nao fizermos uso dessa funcao, e apenas deixar
+    // o GC fazer seu trabalho.
+	for (i=0; i<tam; i++){
+		scanf("%f", v+i);
+	}
+
+    // Printar vetor
+    for (i=0; i<tam; i++){
+        printf("%.1f\n", v[i]);
+	}
+}
