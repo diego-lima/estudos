@@ -665,3 +665,12 @@ int main(){
     free(B);
 	return 0;
 }
+
+
+// 
+// QUESTAO 20
+// 
+/*
+https://launchpad.net/libgc
+doc/simple_example.html
+*/
