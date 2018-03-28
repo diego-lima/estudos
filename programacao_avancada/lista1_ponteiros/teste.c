@@ -671,6 +671,7 @@ int main(){
 // QUESTAO 20
 // 
 /*
+https://launchpad.net/ubuntu/+source/libgc
 https://launchpad.net/libgc
 doc/simple_example.html
 */
