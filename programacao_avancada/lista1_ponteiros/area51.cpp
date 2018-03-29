@@ -1,46 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-int ao_quadrado (const int x){
-    // Uma funcao qualquer que define um certo comportamento
-    return x*x;
-}
-
-float dividir(float x){
-    return ((float) x)/2;
-}
-
-template <class T>
-void map(T (*op)(T), T *l, int tam){
-    // (*op) = um ponteiro de funcao
-    // *l = alguma lista
-    // tam = quantidade de elementos
-    // --------
-    // vamos aplicar a funcao op na lista l
-    // seja la qual for a funcao op,
-    // seja la qual for a lista l.
-    int i;
-
-    for (i=0; i<tam; i++){
-        l[i] = op( l[i] );
-    }
-
-}
-
+#include "gc.h"
+#include "time.h"
 
 int main(){
-    // int v[] = {1,2,3,4};
-    float v[] = {1.0,2.0,3.0,4.0};
-    int i, tam=4;
+	float *v;
+	int tam, i, iter;
+	clock_t tempoInicial, tempoFinal;
+	double tempoGasto;
 
-    // map(ao_quadrado, v, tam);
-    map(dividir, v, tam);
+    GC_INIT();
 
-    // Printar vetor
-    for (i=0; i<tam; i++){
-        // printf("%d\n", v[i]);
-		printf("%.2f\n", v[i]);
-	}    
-    
+	printf("Criando vetores (alocando) de 20000 elementos e desalocando em seguida\n");
+	printf("\n");
+	tam = 5000;
+
+	// Vamos usar o conjunto GC_MALLOC e GC_FREE varias vezes e medir o tempo
+	for (iter=1; iter<=4; iter++){
+		tempoInicial = clock();
+		printf("LIBC: Vetores de %d elementos: ",iter * tam);
+		for (i = 0; i<1000000; i++){
+			v = (float *) GC_MALLOC(iter*tam*sizeof(float));
+			GC_FREE(v);
+		}
+		tempoFinal = clock();
+		tempoGasto = (float)(tempoFinal-tempoInicial)/CLOCKS_PER_SEC;
+		printf("%f\n", tempoGasto);
+	}
 	
+
+	printf("\n");
+
+	// Vamos usar o conjunto malloc e free varias vezes e medir o tempo
+	for (iter=1; iter<=4; iter++){
+		tempoInicial = clock();
+		printf("STDLIB: Vetores de %d elementos: ",iter * tam);
+		for (i = 0; i<1000000; i++){
+			v = (float *) malloc(iter*tam*sizeof(float));
+			free(v);
+		}
+		tempoFinal = clock();
+		tempoGasto = (float)(tempoFinal-tempoInicial)/CLOCKS_PER_SEC;
+		printf("%f\n", tempoGasto);
+	}
+	
+
+	printf("\n");
+
 }
