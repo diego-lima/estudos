@@ -515,6 +515,49 @@ int main(){
 	return 0;
 }
 
+
+// 
+// QUESTAO 17
+// 
+void questao_17(){
+	float *v;
+	v = (float *) malloc(5*sizeof(float));
+	v[0]=5; v[1]=4; v[2]=3; v[3]=2; v[4]=1;
+	clock_t tempoInicial, tempoFinal;
+	double tempoGasto;
+	tempoInicial = clock();
+	//executa o que vc quer
+	questao_14(v, 5);
+	tempoFinal = clock();
+
+	tempoGasto = (float)(tempoFinal-tempoInicial)/CLOCKS_PER_SEC;
+	printf("Tempo em segundos q14: %f", tempoGasto);
+
+	tempoInicial = clock();
+	//executa o que vc quer
+	qsort(v, 5, sizeof(float), comparador);
+	tempoFinal = clock();
+
+	tempoGasto = (float)(tempoFinal-tempoInicial)/CLOCKS_PER_SEC;
+	printf("Tempo em segundos q15: %f", tempoGasto);
+
+	tempoInicial = clock();
+	//executa o que vc quer
+	ordenha(v, 5, comparador);
+	tempoFinal = clock();
+
+	tempoGasto = (float)(tempoFinal-tempoInicial)/CLOCKS_PER_SEC;
+	printf("Tempo em segundos q16: %f", tempoGasto);
+}
+
+int main(){
+
+	questao_17();
+	return 0;
+}
+
+
+
 // 
 // QUESTAO 18
 // 
