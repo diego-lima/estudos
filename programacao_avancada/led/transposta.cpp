@@ -34,6 +34,7 @@ int main(){
 
 
     // Printar
+    printf("A: \n");
     for(i=0; i<nl*nc; i++){
         printf("%.0f ", A[i]);
         if ( (i+1) % nc == 0){
