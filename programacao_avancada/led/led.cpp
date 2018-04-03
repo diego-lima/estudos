@@ -2,19 +2,18 @@
 #include <stdio.h>
 #include <math.h>
 
+const int NC = 8; // numero de colunas
+
 unsigned char prepara(char* coluna){
 
-  char ret[8];
+    int acumulador = 0; // vamos acumular aqui as somas das potencias de 2 para no final ter um numero decimal
+    unsigned char bits; // o retorno, que sera resultado da conversao do acumulador
+    
 
-  x[1] x[]
-
-  for(int i=0; i<8; i++){
-    if(comparativa(coluna[i],'0')){
-      ret [i]='0';
-    }else if(comparativa(coluna[i],'1')){
-      ret[i]='1';
+    for(int i=0; i<NC; i++){
+        if(comparativa(coluna[i],'0')) acumulador = acumulador + pow(2,i); // se, naquela coluna tem 1, entao o bit daquela potencia eh 1
     }
-  }
+    return bits;
 }
 
 int comparativa(char a, char b){
