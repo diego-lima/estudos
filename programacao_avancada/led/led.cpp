@@ -1,57 +1,40 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
+#include <math.h>
 
-float* transposta(float* x, int nl, int nc){
-    float *y;
-    int i,j;
-    y = (float*) malloc(nl*nc*sizeof(float));
+unsigned char prepara(char* coluna){
 
-    memcpy(y, x, nl*nc*sizeof(float));
+  char ret[8];
 
-    for(i = 0; i < nl; i++){
-        for(j = 0; j < nc; j++){
-            x[j*nl + i] = y[i*nc + j];
-        }
+  x[1] x[]
+
+  for(int i=0; i<8; i++){
+    if(comparativa(coluna[i],'0')){
+      ret [i]='0';
+    }else if(comparativa(coluna[i],'1')){
+      ret[i]='1';
     }
+  }
+}
 
+int comparativa(char a, char b){
+  int pot;
+  for(int i=0; i<8; i++){
+    pot = (int) pow(2,i);
+    if(pot & a != pot & b){
+      return 0;
+    }
+  }
+  return 1;
 }
 
 int main(){
-    float *A;
-    int nl=2, nc=3, i;
 
-    // 
-    // MATRIZ A
-    // 
-    // Alocar
-    A = (float*) malloc(nl*nc*sizeof(float));
+  char a = '0', b = '0';
 
-    // Preencher
-    for(i=0; i<nl*nc; i++){
-        A[i] = i;
-    }
+  int r = comparativa(a,b);
 
+  printf("%d\n", r);
 
-    // Printar
-    for(i=0; i<nl*nc; i++){
-        printf("%.0f ", A[i]);
-        if ( (i+1) % nc == 0){
-            printf("\n");
-        }
-    }
-    printf("\n");
-
-    transposta(A, nl, nc);
-
-    // Printar
-    for(i=0; i<nl*nc; i++){
-        printf("%.0f ", A[i]);
-        if ( (i+1) % nl == 0){
-            printf("\n");
-        }
-    }
-    printf("\n");
-
-    return 0;
+  return 0;
 }
