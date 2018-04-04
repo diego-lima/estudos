@@ -5,6 +5,19 @@ using namespace std;
 
 
 void printar_matriz(char m[][3], int nl, int nc){
+    // Funciona com matriz declarada com colchete e chave e tal
+    int i, j;
+    for(i=0; i<nl; i++){
+        for(j=0; j<nc; j++){
+        printf("%c ", m[i][j]);
+        }
+        printf("\n");
+    }
+    
+}
+
+void printar_matriz(char **m, int nl, int nc){
+    // Funciona com matriz declarada com alocacao dinamica
     int i, j;
     for(i=0; i<nl; i++){
         for(j=0; j<nc; j++){
