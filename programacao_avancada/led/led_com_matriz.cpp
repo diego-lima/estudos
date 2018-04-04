@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "snippets.cpp"
 
-const int NC = 8; // numero de colunas
+const int NL = 8; // numero de linhas constante
+const int NC = 3; // numero de colunas constante
 const int N_BITS=8; // bits em um byte
 
 int comparativa(char a, char b){
@@ -21,9 +23,10 @@ int comparativa(char a, char b){
   return 1;
 }
 
-unsigned char prepara(char* coluna){
+unsigned char prepara(char m[][NC], int c){
     /*
-    Recebe um vetor de char, preeenchido com '0' e '1'
+    Recebe uma matriz de char, preeenchida com '0' e '1'
+    Recebe uma coluna, indicando qual deverá ser codificada
     O retorno é a sequencia correspondente de bits convertida para char.
     A leitura do vetor é no sentido do LSB na primeira posicao para o MSB na ultima.
     */
@@ -32,19 +35,22 @@ unsigned char prepara(char* coluna){
     unsigned char bits; // o retorno, que sera resultado da conversao do acumulador
     
 
-    for(int i=0; i<NC; i++){
-        if(comparativa(coluna[i],'1')){
+    for(int i=0; i<NL; i++){
+        if(comparativa(m[i][c],'1')){
             acumulador = acumulador + pow(2,i); // se, naquela coluna tem 1, entao o bit daquela potencia eh 1
         }
     }
+
+    printf("acumulador: %d\n", acumulador);
 
     bits = acumulador;
     return bits;
 }
 
-char *reconstroi(char *vetor, char bits){
+char *reconstroi(char m[][NC], int c, char bits){
     /*
-    Recebe um vetor, onde sera feita a reconstrucao
+    Recebe uma matriz, onde sera feita a reconstrucao
+    Recebe a coluna desejada
     Recebe um char, de onde serao extraidos os bits
     O primeiro elemento do vetor correspondera ao LSB do char
     O ultimo elemento do vetor correspondera ao MSB do char
@@ -54,30 +60,34 @@ char *reconstroi(char *vetor, char bits){
         extrator_bits = pow(2,i); // potencia de 2
         
         if ( (bits & extrator_bits) != 0) //as potencias de 2 tem um '1' em apenas uma 'casa'
-            vetor[i] = '1';
+            m[i][c] = '1';
         else
-            vetor[i] = '0';
+            m[i][c] = '0';
     }
 }
 
 int main(){
-    char coluna[] = {'0','0','0','0','0','0','1','0'};
-    char coluna_recebida[NC];
+    char matriz[NL][NC] = {
+        {'0','1','0'}, //um 'A' feito com apenas 3 colunas
+        {'1','0','1'},
+        {'1','1','1'},
+        {'1','0','1'},
+        {'1','0','1'},
+        {'1','0','1'},
+        {'1','0','1'},
+        {'1','0','1'},
+    };
+    char matriz_reconstruida[NL][NC];
     unsigned char bits;
-    // Printando alguns testes
-    printf("----ASSERTS----\n");
-    printf("'1' comparativa '1': %d\n", comparativa('1', '1'));
-    printf("coluna[0] comparativa '1': %d\n", comparativa(coluna[0], '1'));
-    printf("----ASSERTS----\n\n");
-
-    // Executando o programa realmente
+    int coluna = 0;
 
     // 
     // TRANSMISSOR
     // 
 
-    printf("coluna:              %.8s\n", coluna); // printando o vetor de char, somente 8 caracteres
-    bits = prepara(coluna);                        //comprimindo e guardando num char apenas
+    printf("matriz:\n");
+    printar_matriz(matriz, NL, NC);
+    bits = prepara(matriz, coluna);                        //comprimindo e guardando num char apenas
     printf("bits: %c\n", bits);
     // bits seria enviado de alguma forma
     
@@ -86,8 +96,9 @@ int main(){
     // 
 
     // bits é recebido de algum lugar
-    reconstroi(coluna_recebida, bits);
-    printf("coluna recebida:     %.8s\n", coluna_recebida);
+    reconstroi(matriz_reconstruida, coluna, bits);
+    printf("matriz reconstruida:\n");
+    printar_matriz(matriz_reconstruida, NL, NC);
     
     return 0;
 }
