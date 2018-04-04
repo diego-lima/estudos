@@ -5,8 +5,9 @@
 const int NC = 8; // numero de colunas
 
 int comparativa(char a, char b){
-  int pot;
-  for(int i=0; i<8; i++){
+  int pot; // potencias
+  int N_BITS=8;
+  for(int i=0; i<N_BITS; i++){
     pot = (int) pow(2,i);
     if( (pot & a) != (pot & b) ){
       return 0;
@@ -16,6 +17,11 @@ int comparativa(char a, char b){
 }
 
 unsigned char prepara(char* coluna){
+    /*
+    Recebe um vetor de char, preeenchido com '0' e '1'
+    O retorno é a sequencia correspondente de bits, convertido para char.
+    A leitura do vetor é no sentido do LSB na primeira posicao para o MSB na ultima.
+    */
 
     int acumulador = 0; // vamos acumular aqui as somas das potencias de 2 para no final ter um numero decimal
     unsigned char bits; // o retorno, que sera resultado da conversao do acumulador
@@ -27,14 +33,25 @@ unsigned char prepara(char* coluna){
         }
     }
 
-    printf("acumulador: %d\n", acumulador);
-
     bits = acumulador;
     return bits;
 }
 
+char *reconstroi(char *vetor, char bits){
+    int extrator_bits;
+    for (int i = 0; i < NC; i++){
+        extrator_bits = pow(2,i);
+        
+        if ( (bits & extrator_bits) != 0)
+            vetor[i] = '1';
+        else
+            vetor[i] = '0';
+    }
+}
+
 int main(){
     char coluna[] = {'0','0','0','0','0','0','1','0'};
+    char coluna_recebida[8];
     unsigned char bits;
     // Printando alguns testes
     printf("----ASSERTS----\n");
@@ -43,8 +60,21 @@ int main(){
     printf("----ASSERTS----\n\n");
 
     // Executando o programa realmente
-    bits = prepara(coluna);
+
+    // 
+    // TRANSMISSOR
+    // 
+    printf("coluna:              %.8s\n", coluna); // printando o vetor de char, somente 8 caracteres
+    bits = prepara(coluna);                        //comprimindo e guardando num char apenas
     printf("bits: %c\n", bits);
+    // bits seria enviado
+    
+    // 
+    // RECEPTOR
+    // 
+    // bits é recebido de algum lugar
+    reconstroi(coluna_recebida, bits);
+    printf("coluna recebida:     %.8s\n", coluna_recebida);
     
     return 0;
 }
