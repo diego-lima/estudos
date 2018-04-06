@@ -116,4 +116,6 @@ int main(){
     printar_matriz(matriz_reconstruida, NL, NC);
     
     return 0;
+
+
 }
