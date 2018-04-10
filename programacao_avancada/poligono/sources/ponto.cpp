@@ -38,9 +38,15 @@ float Ponto::xy(float a, float b){
     _y = b;
 }
 
-void Ponto::combinar(Ponto p){
-    _x = _x + p.x();
-    _y = _y + p.y();
+Ponto Ponto::add(Ponto p){
+    p.transladar(_x, _y);
+    return p;
+}
+
+Ponto Ponto::sub(Ponto p){
+    Ponto p_aux(_x, _y);
+    p_aux.transladar(-1 * p.x(), -1 * p.y());
+    return p_aux;
 }
 
 float Ponto::norma(void){
@@ -48,10 +54,16 @@ float Ponto::norma(void){
 }
 
 void Ponto::transladar(float a, float b){
-    Ponto p(a,b);
-    combinar(p); // Usando a própria função da classe
+    _x = _x + a;
+    _y = _y + b;
 }
 
 void Ponto::print(void){
-    printf("(%.1f,%.1f)", _x, _y);
+    printf("(%.2f,%.2f)", _x, _y);
+}
+
+bool Ponto::igual(Ponto p){
+    if (_x == p.x() && _y == p.y())
+        return true;
+    return false;
 }

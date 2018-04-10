@@ -5,8 +5,10 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     sources/ponto.cpp \
-    sources/poligono.cpp
+    sources/poligono.cpp \
+    sources/linha.cpp
 
 HEADERS += \
     headers/ponto.h \
-    headers/poligono.h
+    headers/poligono.h \
+    headers/linha.h

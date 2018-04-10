@@ -29,9 +29,11 @@ class Ponto{
         // Setter de _x e _y ao mesmo tempo
         float xy(float a, float b);
 
-        // Combina as coordenadas do ponto com as do ponto p.
-        // É a operação equivalente a soma e/ou subtração ao mesmo tempo
-        void combinar(Ponto p);
+        // Soma as coordenadas do ponto com as do ponto p.
+        Ponto add(Ponto p);
+
+        // Subtrai as coordenadas do ponto com as do ponto p.
+        Ponto sub(Ponto p);
 
         // Retorna o módulo de um vetor que parte da origem até o ponto
         float norma(void);
@@ -42,6 +44,9 @@ class Ponto{
 
         //Printa as coordenadas do ponto e quebra linha
         void print(void);
+
+        // Extra: determina se um ponto é igual a outro
+        bool igual(Ponto p);
 
 };
 

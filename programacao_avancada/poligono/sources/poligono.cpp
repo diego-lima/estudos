@@ -71,14 +71,26 @@ float Poligono::area(void){
         return 0;
     }
 
+    // Do primeiro ate o penultimo
     for (i = 0; i < qtd_pontos - 1; i++){
         left = left + ( pontos[i].x() * pontos[i+1].y() );
     }
 
+    // Do segundo ate o ultimo
     for (i = 1; i < qtd_pontos; i++){
         right = right + ( pontos[i].x() * pontos[i-1].y() );
     }
 
     // Area = (1/2) * |left - right|
     return 0.5 * abs(left - right);
+}
+
+bool Poligono::contem_ponto(Ponto p){
+    int i;
+    for (i = 0; i < qtd_pontos; i++){
+        if ( pontos[i].igual(p) )
+            return true;
+        return false;
+    }
+
 }

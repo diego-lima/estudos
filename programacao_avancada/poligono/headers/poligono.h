@@ -29,11 +29,15 @@ class Poligono{
         // Printa a sequência anti-horária de pontos
         void print(void);
 
-        // Translada todos os pontos do poligono
+        // Translada todos os pontos do polírgono
         void transladar(float a, float b);
 
-        // Retorna a area do poligono
+        // Retorna a área do poligono
+        // Polígonos com menos de 3 pontos não têm área.
         float area(void);
+
+        // Extra: determina se um ponto é um dos que formam um poligono
+        bool contem_ponto(Ponto p);
 
 
 
