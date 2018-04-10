@@ -25,7 +25,7 @@ void Linha::print(void){
     printf("\n");
 }
 
-char intersecao(Linha l1, Linha l2, Ponto *ponto){
+bool intersecao(Linha l1, Linha l2, Ponto *ponto){
     // IMPLEMENTAÇÃO ENCONTRADA EM
     // http://flassari.is/2008/11/line-line-intersection-in-cplusplus/
 
@@ -39,7 +39,7 @@ char intersecao(Linha l1, Linha l2, Ponto *ponto){
 
     float d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
     // If d is zero, there is no intersection
-    if (d == 0) return 0;
+    if (d == 0) return false;
 
     // Get the x and y
     float pre = (x1*y2 - y1*x2), post = (x3*y4 - y3*x4);
@@ -48,13 +48,13 @@ char intersecao(Linha l1, Linha l2, Ponto *ponto){
 
     // Check if the x and y coordinates are within both lines
     if ( x < min(x1, x2) || x > max(x1, x2) ||
-    x < min(x3, x4) || x > max(x3, x4) ) return 0;
+    x < min(x3, x4) || x > max(x3, x4) ) return false;
     if ( y < min(y1, y2) || y > max(y1, y2) ||
-    y < min(y3, y4) || y > max(y3, y4) ) return 0;
+    y < min(y3, y4) || y > max(y3, y4) ) return false;
 
     // Return the point of intersection
     Ponto ret(x,y);
     *ponto = ret;
-    return 1;
+    return true;
 
 }

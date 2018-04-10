@@ -59,7 +59,7 @@ void Ponto::transladar(float a, float b){
 }
 
 void Ponto::print(void){
-    printf("(%.2f,%.2f)", _x, _y);
+    printf("(%.1f,%.1f)", _x, _y);
 }
 
 bool Ponto::igual(Ponto p){

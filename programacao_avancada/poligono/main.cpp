@@ -3,30 +3,54 @@
 #include "headers/linha.h"
 #include "headers/poligono.h"
 
+#define NENHUMA -1
+
 using namespace std;
 
 int main(){
     Poligono retangulo, triangulo, retriangulo, self_intersect;
     Ponto p, p2, p_intersecao;
     char ret;
-    p2.xy(0.5, 0.5);
+    Linha *linhas = new Linha[2];
 
-    Linha l(p, p2);
-    printf("Linha l: ");
-    l.print();
+    //
+    // LINHA 1
+    //
+    p.xy(0, 0);
+    p2.xy(2,0);
+    linhas[0] = Linha(p, p2);
+    printf("Linha 0: ");
+    linhas[0].print();
 
-    p2.xy(0.5,0);
-    p.xy(0, 0.5);
-    Linha l2(p, p2);
-    printf("Linha l2: ");
-    l2.print();
+    //
+    // LINHA 2
+    //
+    p.xy(2, 0);
+    p2.xy(2,1);
+    linhas[1] = Linha(p, p2);
+    printf("Linha 1: ");
+    linhas[1].print();
 
-    p_intersecao.print();
-    ret = intersecao(l ,l2, &p_intersecao);
-    if (ret)
+    //
+    // INTERSECAO ENTRE LINHAS
+    //
+    printf("Intersecao entre linhas: ");
+    ret = intersecao(linhas[0] ,linhas[1], &p_intersecao);
+    if (ret && !linhas[0].limitada_por(p_intersecao))
         p_intersecao.print();
 
-    printf("\n\n");
+    //
+    // IGUALDADE ENTRE PONTOS
+    //
+    p.xy(2,0);
+    p2.xy(2,0.1);
+    printf("\nP_INTERSECAO|P IGUAIS: %d", p_intersecao.igual(p));
+
+    //
+    // RETANGULO
+    //
+    printf("\n\nRETANGULO\n");
+    p.xy(0,0);
     retangulo.adicionar_ponto(p);
     p.xy(2,0);
     retangulo.adicionar_ponto(p);
@@ -35,8 +59,12 @@ int main(){
     p.xy(0,1);
     retangulo.adicionar_ponto(p);
     retangulo.print();
-    printf("Area retangulo: %.2f\n", retangulo.area());
+    printf("Area retangulo: %.2f\n\n", retangulo.area());
 
+    //
+    // TRIANGULO
+    //
+    printf("TRIANGULO\n");
     p.xy(1,0);
     triangulo.adicionar_ponto(p);
     p.xy(1,1);
@@ -44,8 +72,12 @@ int main(){
     p.xy(0,0);
     triangulo.adicionar_ponto(p);
     triangulo.print();
-    printf("Area triangulo: %.2f\n", triangulo.area());
+    printf("Area triangulo: %.2f\n\n", triangulo.area());
 
+    //
+    // RETRIANGULO
+    //
+    printf("RETANGULO + 2 TRIANGULOS\n");
     p.xy(0,0);
     retriangulo.adicionar_ponto(p);
     p.xy(2,0);
@@ -57,18 +89,25 @@ int main(){
     p.xy(0,2);
     retriangulo.adicionar_ponto(p);
     retriangulo.print();
-    printf("Area retriangulo: %.2f\n", retriangulo.area());
+    printf("Area retriangulo: %.2f\n\n", retriangulo.area());
 
 
+    //
+    // SELF-INTERSECT
+    //
+    printf("\nFIGURA QUE SE CRUZA CONSIGO MESMA\n");
     p.xy(0,0);
     self_intersect.adicionar_ponto(p);
-    p.xy(0,2);
-    self_intersect.adicionar_ponto(p);
     p.xy(2,0);
+    self_intersect.adicionar_ponto(p);
+    p.xy(0,2);
     self_intersect.adicionar_ponto(p);
     p.xy(2,2);
     self_intersect.adicionar_ponto(p);
     self_intersect.print();
-    printf("Area self_intersect: %.2f\n", self_intersect.area());
+    printf("Area self_intersect: %.2f", self_intersect.area());
+    p.xy(-1,-1);
+
+    printf("\n\n");
     return 0;
 }

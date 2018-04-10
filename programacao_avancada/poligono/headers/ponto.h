@@ -42,7 +42,7 @@ class Ponto{
         // Equivalente a combinar com o ponto (a,b)
         void transladar(float a, float b);
 
-        //Printa as coordenadas do ponto e quebra linha
+        //Printa as coordenadas do ponto
         void print(void);
 
         // Extra: determina se um ponto é igual a outro

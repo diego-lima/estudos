@@ -1,4 +1,5 @@
 #include "headers/ponto.h"
+#include "headers/linha.h"
 
 #ifndef POLIGONO_H
 #define POLIGONO_H
@@ -7,9 +8,9 @@ class Poligono{
     private:
         int qtd_pontos; // Indica ate onde percorrer array de pontos (similar ao '\0' da string)
         int qtd_pontos_maxima; // Indica limite superior a partir do qual rejeita-se pontos
+        Ponto *pontos; // Array de pontos
 
     public:
-        Ponto *pontos; // Array de pontos
         // Construtor padrão, que aloca 100 pontos
         Poligono();
 
@@ -39,8 +40,11 @@ class Poligono{
         // Extra: determina se um ponto é um dos que formam um poligono
         bool contem_ponto(Ponto p);
 
-
-
+        // Extra: determina se o poligono se intercepta consigo mesmo
+        // Retorna o indice da primeira linha a se interceptar com outra
+        // Retorna tambem o primeiro ponto de interseção encontrado
+        // Retorna -1 caso nao exista interseção entre linhas
+        int self_intersect(Ponto *p);
 
 };
 

@@ -18,11 +18,11 @@ class Linha{
         // Printa as coordenadas da linha
         void print(void);
 
-        friend char intersecao(Linha l1, Linha l2, Ponto *ponto);
+        friend bool intersecao(Linha l1, Linha l2, Ponto *ponto);
 };
 
 // Determina o ponto de interseção entre duas linhas (segmentos de reta).
 // Retorna 0 se não houver interseção.
-char intersecao(Linha l1, Linha l2, Ponto *ponto);
+bool intersecao(Linha l1, Linha l2, Ponto *ponto);
 
 #endif // LINHA_H
