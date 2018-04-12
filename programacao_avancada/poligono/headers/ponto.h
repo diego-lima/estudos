@@ -29,11 +29,17 @@ class Ponto{
         // Setter de _x e _y ao mesmo tempo
         float xy(float a, float b);
 
-        // Soma as coordenadas do ponto com as do ponto p.
+        // Soma e retorna as coordenadas do ponto com as do ponto p.
         Ponto add(Ponto p);
 
-        // Subtrai as coordenadas do ponto com as do ponto p.
+        // Soma e retorna as coordenadas do ponto com as do ponto p.
+        Ponto operator +(Ponto p);
+
+        // Subtrai e retorna as coordenadas do ponto com as do ponto p.
         Ponto sub(Ponto p);
+
+        // Subtrai e retorna as coordenadas do ponto com as do ponto p.
+        Ponto operator -(Ponto p);
 
         // Retorna o módulo de um vetor que parte da origem até o ponto
         float norma(void);

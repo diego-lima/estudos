@@ -47,6 +47,15 @@ int main(){
     printf("\nP_INTERSECAO|P IGUAIS: %d", p_intersecao.igual(p));
 
     //
+    // Operators de pontos
+    //
+    printf("\nOperators de pontos\n");
+    Ponto p3;
+    p3.print();
+    p3 = p2 - p2 - p2 + p2 + p;
+    p3.print();
+
+    //
     // RETANGULO
     //
     printf("\n\nRETANGULO\n");

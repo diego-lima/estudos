@@ -27,22 +27,24 @@ class Poligono{
         // Retorna true em caso de sucesso.
         bool adicionar_ponto(Ponto p);
 
-        // Printa a sequência anti-horária de pontos
+        // Printa a sequência de pontos
         void print(void);
 
-        // Translada todos os pontos do polírgono
+        // Translada todos os pontos do polígono
         void transladar(float a, float b);
 
         // Retorna a área do poligono
         // Polígonos com menos de 3 pontos não têm área.
+        // Em caso de polígonos que se cruzam em si mesmos, a função recursivamente
+        // calcula as áreas de cada subpolígono.
         float area(void);
 
-        // Extra: determina se um ponto é um dos que formam um poligono
+        // Extra: determina se um ponto é um dos que formam o poligono
         bool contem_ponto(Ponto p);
 
         // Extra: determina se o poligono se intercepta consigo mesmo
         // Retorna o indice da primeira linha a se interceptar com outra
-        // Retorna tambem o primeiro ponto de interseção encontrado
+        // Retorna também o primeiro ponto de interseção encontrado
         // Retorna -1 caso nao exista interseção entre linhas
         int self_intersect(Ponto *p);
 

@@ -116,7 +116,8 @@ float Poligono::area(void){
         subpoligono1.adicionar_ponto(p); // Adicionando o ponto de interseção
 
         // Adicionar os pontos do segundo subpoligono:
-        // começando do ponto de interseção e retornando a ele novamente
+        // começando do ponto de interseção e depois o restante dos pontos
+        // do poligono original
         subpoligono2.adicionar_ponto(p); // Adicionando o ponto de interseção
         for (i=indice_intersecao + 1; i < qtd_pontos; i++)
             subpoligono2.adicionar_ponto(pontos[i]);

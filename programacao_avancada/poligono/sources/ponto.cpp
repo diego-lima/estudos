@@ -39,14 +39,27 @@ float Ponto::xy(float a, float b){
 }
 
 Ponto Ponto::add(Ponto p){
-    p.transladar(_x, _y);
-    return p;
+    Ponto ret(_x, _y);
+    ret.transladar(p.x(), p.y());
+    return ret;
+}
+
+Ponto Ponto::operator + (Ponto v){
+  Ponto ret(_x, _y);
+  ret = ret.add(v);
+  return(ret);
 }
 
 Ponto Ponto::sub(Ponto p){
     Ponto p_aux(_x, _y);
     p_aux.transladar(-1 * p.x(), -1 * p.y());
     return p_aux;
+}
+
+Ponto Ponto::operator - (Ponto v){
+  Ponto ret(_x, _y);
+  ret = ret.sub(v);
+  return(ret);
 }
 
 float Ponto::norma(void){
