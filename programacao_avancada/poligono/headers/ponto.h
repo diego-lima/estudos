@@ -18,16 +18,16 @@ class Ponto{
         float x();
 
         // Setter da propriedade _x
-        float x(float a);
+        void x(float a);
 
         // Getter da propriedade _y
         float y();
 
         // Setter da propriedade _y
-        float y(float a);
+        void y(float a);
 
         // Setter de _x e _y ao mesmo tempo
-        float xy(float a, float b);
+        void xy(float a, float b);
 
         // Soma e retorna as coordenadas do ponto com as do ponto p.
         Ponto add(Ponto p);
@@ -47,6 +47,9 @@ class Ponto{
         // Desloca em _x de a, e em _y de b.
         // Equivalente a combinar com o ponto (a,b)
         void transladar(float a, float b);
+
+        // Rotaciona o vetor equivalente às coordenadas do ponto em relação à origem (sentido anti-horário).
+        void rotacionar(float teta);
 
         //Printa as coordenadas do ponto
         void print(void);

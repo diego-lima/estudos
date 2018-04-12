@@ -33,6 +33,9 @@ class Poligono{
         // Translada todos os pontos do polígono
         void transladar(float a, float b);
 
+        // Rotaciona todos os pontos do polígono em relação à origem (sentido anti-horário)
+        void rotacionar(float teta);
+
         // Retorna a área do poligono
         // Polígonos com menos de 3 pontos não têm área.
         // Em caso de polígonos que se cruzam em si mesmos, a função recursivamente

@@ -69,6 +69,12 @@ void Poligono::transladar(float a, float b){
         pontos[i].transladar(a, b);
 }
 
+void Poligono::rotacionar(float teta){
+    int i;
+    for (i = 0; i < qtd_pontos; i++)
+        pontos[i].rotacionar(teta);
+}
+
 float Poligono::area(void){
     int i, indice_intersecao;
     float left=0, right=0;

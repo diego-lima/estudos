@@ -4,6 +4,10 @@
 
 using namespace std;
 
+float grau(float radianos){
+    // Converte de radianos pra graus
+    return radianos * M_PI / 180;
+}
 
 Ponto::Ponto(){
     _x = 0;
@@ -19,21 +23,19 @@ float Ponto::x(){
     return _x;
 }
 
-float Ponto::x(float a){
+void Ponto::x(float a){
     _x = a;
-    return _x;
 }
 
 float Ponto::y(){
     return _y;
 }
 
-float Ponto::y(float a){
+void Ponto::y(float a){
     _y = a;
-    return _y;
 }
 
-float Ponto::xy(float a, float b){
+void Ponto::xy(float a, float b){
     _x = a;
     _y = b;
 }
@@ -69,6 +71,14 @@ float Ponto::norma(void){
 void Ponto::transladar(float a, float b){
     _x = _x + a;
     _y = _y + b;
+}
+
+void Ponto::rotacionar(float teta){
+    float novo_x, novo_y;
+    novo_x = cos(grau(teta)) * _x - sin(grau(teta)) * _y;
+    novo_y = sin(grau(teta)) * _x + cos(grau(teta)) * _y;
+    xy(novo_x, novo_y);
+
 }
 
 void Ponto::print(void){

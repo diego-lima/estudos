@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include "headers/ponto.h"
 #include "headers/linha.h"
 #include "headers/poligono.h"
@@ -68,7 +69,11 @@ int main(){
     p.xy(0,1);
     retangulo.adicionar_ponto(p);
     retangulo.print();
-    printf("Area retangulo: %.2f\n\n", retangulo.area());
+    printf("Area retangulo: %.2f\n", retangulo.area());
+    printf(">>>>>Rotaciona:\n");
+    retangulo.rotacionar(90);
+    retangulo.print();
+    printf("\n");
 
     //
     // TRIANGULO
