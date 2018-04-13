@@ -13,7 +13,7 @@ Mostrador::Mostrador(){
 
 }
 
-Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
+Mostrador::Mostrador(int argc, char *argv[], Poligono poligono, bool enquadrar){
     //! Código adaptado do exemplo 'areachart' do próprio website do Qt.
     //! site: https://doc.qt.io/qt-5.10/qtcharts-areachart-example.html
     //! Caso necessario:
@@ -29,7 +29,7 @@ Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
     //! setar_limites enquadra o poligono para ficar encaixado
     //! na origem
     float x_range, y_range;
-    setar_limites(&poligono, &x_range, &y_range);
+    setar_limites(&poligono, &x_range, &y_range, enquadrar);
     for (int i = 0; i < poligono.qtd_pontos; i++)
         *series0 << QPointF(poligono.pontos[i].x(), poligono.pontos[i].y());
 //![2]
@@ -72,7 +72,7 @@ Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
 
 }
 
-void Mostrador::setar_limites(Poligono* poligono, float *a, float *b){
+void Mostrador::setar_limites(Poligono* poligono, float *a, float *b, bool enquadrar){
     float x_menor, y_menor;
     float x_maior, y_maior;
     float padding = 0.5;
@@ -89,7 +89,8 @@ void Mostrador::setar_limites(Poligono* poligono, float *a, float *b){
     }
 
     // Puxa para a origem
-    poligono->transladar(-1*x_menor, -1*y_menor);
+    if (enquadrar)
+        poligono->transladar(-1*x_menor, -1*y_menor);
 
     x_maior = poligono->pontos[0].x();
     y_maior = poligono->pontos[0].y();

@@ -4,6 +4,7 @@
 #include "headers/ponto.h"
 #include "headers/linha.h"
 #include "headers/poligono.h"
+#include "headers/retangulo.h"
 #include "headers/mostrador.h"
 
 #define NENHUMA -1
@@ -93,7 +94,16 @@ int main(int argc, char *argv[]){
     self_intersect.print();
     printf("Area self_intersect: %.2f", self_intersect.area());
 
+    //
+    // CLASSE RETANGULO
+    //
+    Retangulo rett(5,6,3,5);
+    printf("\nClasse retangulo\n");
+    rett.print();
+
+
     // Mostrando na tela um dos poligonos
-    Mostrador(argc, argv, retriangulo);
+     Mostrador(argc, argv, rett);
+
     return 0;
 }

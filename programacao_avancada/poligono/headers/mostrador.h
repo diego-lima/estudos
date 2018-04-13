@@ -8,11 +8,11 @@ class Mostrador{
         Mostrador();
 
         // Recebe o poligono a ser mostrado através de um Area Chart do QT.
-        Mostrador(int argc, char *argv[], Poligono poligono);
+        Mostrador(int argc, char *argv[], Poligono poligono, bool enquadrar=false);
 
         // Enquadra o poligono perto da origem e ajusta o alcance do gráfico
         // para o desenho do polígono ficar grande
-        void setar_limites (Poligono* poligono, float * a, float* b);
+        void setar_limites (Poligono* poligono, float * a, float* b, bool enquadrar);
 };
 
 #endif // MOSTRADOR_H

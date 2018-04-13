@@ -8,10 +8,12 @@ SOURCES += main.cpp \
     sources/ponto.cpp \
     sources/poligono.cpp \
     sources/linha.cpp \
-    sources/mostrador.cpp
+    sources/mostrador.cpp \
+    sources/retangulo.cpp
 
 HEADERS += \
     headers/ponto.h \
     headers/poligono.h \
     headers/linha.h \
-    headers/mostrador.h
+    headers/mostrador.h \
+    headers/retangulo.h
