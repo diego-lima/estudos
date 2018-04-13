@@ -45,7 +45,6 @@ class Ponto{
         float norma(void);
 
         // Desloca em _x de a, e em _y de b.
-        // Equivalente a combinar com o ponto (a,b)
         void transladar(float a, float b);
 
         // Rotaciona o vetor equivalente às coordenadas do ponto em relação à origem (sentido anti-horário).

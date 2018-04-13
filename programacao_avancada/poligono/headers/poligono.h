@@ -1,8 +1,8 @@
-#include "headers/ponto.h"
-#include "headers/linha.h"
-
 #ifndef POLIGONO_H
 #define POLIGONO_H
+
+#include "headers/ponto.h"
+#include "headers/linha.h"
 
 class Poligono{
     private:
@@ -36,10 +36,10 @@ class Poligono{
         // Rotaciona todos os pontos do polígono em relação à origem (sentido anti-horário)
         void rotacionar(float teta);
 
-        // Retorna a área do poligono
-        // Polígonos com menos de 3 pontos não têm área.
-        // Em caso de polígonos que se cruzam em si mesmos, a função recursivamente
+        // Extra: Em caso de polígonos que se cruzam em si mesmos, a função recursivamente
         // calcula as áreas de cada subpolígono.
+        // Retorna a área do poligono total.
+        // Polígonos com menos de 3 pontos não têm área.
         float area(void);
 
         // Extra: determina se um ponto é um dos que formam o poligono
@@ -50,6 +50,9 @@ class Poligono{
         // Retorna também o primeiro ponto de interseção encontrado
         // Retorna -1 caso nao exista interseção entre linhas
         int self_intersect(Ponto *p);
+
+        // Extra: liberar acesso para classe que mostra polígono na tela
+        friend class Mostrador;
 
 };
 

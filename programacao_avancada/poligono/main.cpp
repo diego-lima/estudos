@@ -1,14 +1,14 @@
 #include <iostream>
 #include <math.h>
+
 #include "headers/ponto.h"
 #include "headers/linha.h"
 #include "headers/poligono.h"
+#include "headers/mostrador.h"
 
 #define NENHUMA -1
 
-using namespace std;
-
-int main(){
+int main(int argc, char *argv[]){
     Poligono retangulo, triangulo, retriangulo, self_intersect;
     Ponto p, p2, p_intersecao;
     char ret;
@@ -122,6 +122,7 @@ int main(){
     printf("Area self_intersect: %.2f", self_intersect.area());
     p.xy(-1,-1);
 
-    printf("\n\n");
+    // Mostrando na tela um dos poligonos
+    Mostrador(argc, argv, retriangulo);
     return 0;
 }
