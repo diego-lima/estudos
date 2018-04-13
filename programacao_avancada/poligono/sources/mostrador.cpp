@@ -16,6 +16,8 @@ Mostrador::Mostrador(){
 Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
     //! Código adaptado do exemplo 'areachart' do próprio website do Qt.
     //! site: https://doc.qt.io/qt-5.10/qtcharts-areachart-example.html
+    //! Caso necessario:
+    //! $ sudo apt install libgl1-mesa-dev
 
     QApplication a(argc, argv);
 
@@ -24,13 +26,17 @@ Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
 //![1]
 
 //![2]
+    //! setar_limites enquadra o poligono para ficar encaixado
+    //! na origem
+    float x_range, y_range;
+    setar_limites(&poligono, &x_range, &y_range);
     for (int i = 0; i < poligono.qtd_pontos; i++)
         *series0 << QPointF(poligono.pontos[i].x(), poligono.pontos[i].y());
 //![2]
 
 //![3]
     QAreaSeries *series = new QAreaSeries(series0);
-    series->setName("Batman");
+    series->setName("Polígono");
     QPen pen(0x059605);
     pen.setWidth(3);
     series->setPen(pen);
@@ -45,10 +51,8 @@ Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
 //![4]
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Simple areachart example");
+    chart->setTitle("Mostrando Polígono");
     chart->createDefaultAxes();
-    int x_range, y_range;
-    setar_limites(&poligono, &x_range, &y_range);
     chart->axisX()->setRange(0, x_range);
     chart->axisY()->setRange(0, y_range);
 //![4]
@@ -60,7 +64,7 @@ Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
 
     QMainWindow window;
     window.setCentralWidget(chartView);
-    window.resize(1200, 900);
+    window.resize(600, 600);
     window.show();
 
     a.exec();
@@ -68,31 +72,34 @@ Mostrador::Mostrador(int argc, char *argv[], Poligono poligono){
 
 }
 
-void Mostrador::setar_limites(Poligono* poligono, int *a, int *b){
+void Mostrador::setar_limites(Poligono* poligono, float *a, float *b){
     float x_menor, y_menor;
     float x_maior, y_maior;
-    int padding = 1;
+    float padding = 0.5;
 
     x_menor = poligono->pontos[0].x();
-    x_maior = x_menor;
     y_menor = poligono->pontos[0].y();
-    y_maior = y_menor;
 
-    printf("\n\nsetando limites\n");
     for (int i = 1; i < poligono->qtd_pontos; i++){
         if(poligono->pontos[i].x() < x_menor)
             x_menor = poligono->pontos[i].x();
         if(poligono->pontos[i].y() < y_menor)
             y_menor = poligono->pontos[i].y();
 
+    }
+
+    // Puxa para a origem
+    poligono->transladar(-1*x_menor, -1*y_menor);
+
+    x_maior = poligono->pontos[0].x();
+    y_maior = poligono->pontos[0].y();
+
+    for (int i = 0; i < poligono->qtd_pontos; i++){
         if(poligono->pontos[i].x() > x_maior)
             x_maior = poligono->pontos[i].x();
         if(poligono->pontos[i].y() > y_maior)
             y_maior = poligono->pontos[i].y();
     }
-
-//    poligono->transladar(-1*x_menor, -1*y_menor);
-//    (*poligono).transladar(-1, -1);
 
     *a = x_maior + padding;
     *b = y_maior + padding;

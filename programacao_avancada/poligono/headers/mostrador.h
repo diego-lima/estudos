@@ -11,7 +11,8 @@ class Mostrador{
         Mostrador(int argc, char *argv[], Poligono poligono);
 
         // Enquadra o poligono perto da origem e ajusta o alcance do gráfico
-        void setar_limites (Poligono* poligono, int* a, int* b);
+        // para o desenho do polígono ficar grande
+        void setar_limites (Poligono* poligono, float * a, float* b);
 };
 
 #endif // MOSTRADOR_H

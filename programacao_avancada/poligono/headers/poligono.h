@@ -51,9 +51,14 @@ class Poligono{
         // Retorna -1 caso nao exista interseção entre linhas
         int self_intersect(Ponto *p);
 
+        // Extra: permite adicionar pontos ao polígono com operador <<
+        // poligono << Ponto(0,0);
+        friend Poligono& operator<<(Poligono& poligono, Ponto p);
+
         // Extra: liberar acesso para classe que mostra polígono na tela
         friend class Mostrador;
-
 };
+
+Poligono& operator<<(Poligono& poligono, Ponto p);
 
 #endif // POLIGONO_H

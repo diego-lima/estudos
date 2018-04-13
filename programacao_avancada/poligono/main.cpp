@@ -60,18 +60,11 @@ int main(int argc, char *argv[]){
     // RETANGULO
     //
     printf("\n\nRETANGULO\n");
-    p.xy(0,0);
-    retangulo.adicionar_ponto(p);
-    p.xy(2,0);
-    retangulo.adicionar_ponto(p);
-    p.xy(2,1);
-    retangulo.adicionar_ponto(p);
-    p.xy(0,1);
-    retangulo.adicionar_ponto(p);
+    retangulo << Ponto(0,0) << Ponto(2,0) << Ponto(2,1) << Ponto(0,1);
     retangulo.print();
     printf("Area retangulo: %.2f\n", retangulo.area());
     printf(">>>>>Rotaciona:\n");
-    retangulo.rotacionar(90);
+    retangulo.rotacionar(60);
     retangulo.print();
     printf("\n");
 
@@ -79,12 +72,7 @@ int main(int argc, char *argv[]){
     // TRIANGULO
     //
     printf("TRIANGULO\n");
-    p.xy(1,0);
-    triangulo.adicionar_ponto(p);
-    p.xy(1,1);
-    triangulo.adicionar_ponto(p);
-    p.xy(0,0);
-    triangulo.adicionar_ponto(p);
+    triangulo << Ponto(1,0) << Ponto(1,1) << Ponto(0,0);
     triangulo.print();
     printf("Area triangulo: %.2f\n\n", triangulo.area());
 
@@ -92,16 +80,7 @@ int main(int argc, char *argv[]){
     // RETRIANGULO
     //
     printf("RETANGULO + 2 TRIANGULOS\n");
-    p.xy(0,0);
-    retriangulo.adicionar_ponto(p);
-    p.xy(2,0);
-    retriangulo.adicionar_ponto(p);
-    p.xy(2,2);
-    retriangulo.adicionar_ponto(p);
-    p.xy(1,1);
-    retriangulo.adicionar_ponto(p);
-    p.xy(0,2);
-    retriangulo.adicionar_ponto(p);
+    retriangulo << Ponto(0,0) << Ponto(2,0) << Ponto(2,2) << Ponto(1,1) << Ponto(0,2);
     retriangulo.print();
     printf("Area retriangulo: %.2f\n\n", retriangulo.area());
 
@@ -110,17 +89,9 @@ int main(int argc, char *argv[]){
     // SELF-INTERSECT
     //
     printf("\nFIGURA QUE SE CRUZA CONSIGO MESMA\n");
-    p.xy(0,0);
-    self_intersect.adicionar_ponto(p);
-    p.xy(2,0);
-    self_intersect.adicionar_ponto(p);
-    p.xy(0,2);
-    self_intersect.adicionar_ponto(p);
-    p.xy(2,2);
-    self_intersect.adicionar_ponto(p);
+    self_intersect << Ponto(0,0) << Ponto(2,0) << Ponto(0,2) << Ponto(2,2);
     self_intersect.print();
     printf("Area self_intersect: %.2f", self_intersect.area());
-    p.xy(-1,-1);
 
     // Mostrando na tela um dos poligonos
     Mostrador(argc, argv, retriangulo);

@@ -174,5 +174,9 @@ int Poligono::self_intersect(Ponto *p){
 
 }
 
+Poligono& operator<<(Poligono& poligono, Ponto p){
+    poligono.adicionar_ponto(p);
+    return poligono;
 
+}
 
