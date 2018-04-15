@@ -8,7 +8,7 @@
 """
 # from random import random
 from libc.stdlib cimport rand, RAND_MAX
-data = [
+data_points_list = [
     [ 1.2, 0.7],
     [-0.3, 0.5],
     [  -3,  -1],
@@ -26,6 +26,25 @@ labels = [
      1
 ]
 
+cdef struct data_t:
+    float x
+    float y
+
+cdef struct label_t:
+    int z
+
+
+cdef void make_dado_struct(list dados_list, data_t *dados_struct):
+    cdef data_t *dado
+
+    for i in range(len(dados_list)):
+        dado = &dados_struct[i]
+        dado[0].x = dados_list[i][0]
+        dado[0].y = dados_list[i][1]
+
+cdef data_t dados_struct[6]
+make_dado_struct(data_points_list, dados_struct)
+
 def pipeline():
     #
     # initial parameters
@@ -33,15 +52,15 @@ def pipeline():
     cdef:
         float a = 1, b = -2, c = -1, x, y
         float score, pull, step_size
-        int i, label, length
+        int i, label, length, iter, N = 500000
 
-    length = len(data) - 1
+    length = len(data_points_list) - 1
 
-    for iter in xrange(500000):
+    for iter in range(N):
         # pick a random data point
         i = int(rand()/(1.0*RAND_MAX)*length)
-        x = data[i][0]
-        y = data[i][1]
+        x = dados_struct[i].x
+        y = dados_struct[i].y
         label = labels[i]
 
         # compute pull
