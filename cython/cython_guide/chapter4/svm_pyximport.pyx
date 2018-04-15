@@ -1,4 +1,5 @@
 """
+Dados de brinquedo inventados -> labels:
 [1.2, 0.7] -> +1
 [-0.3, 0.5] -> -1
 [-3, -1] -> +1
@@ -6,7 +7,10 @@
 [3.0, 1.1] -> -1
 [2.1, -3] -> +1
 """
-# from random import random
+"""
+Sempre procurar uma função correspondente do python no C: ao invés
+de usar o random do python, usa a do C
+"""
 from libc.stdlib cimport rand, RAND_MAX
 data_points_list = [
     [ 1.2, 0.7],
@@ -17,6 +21,9 @@ data_points_list = [
     [ 2.1,  -3]
 ]
 
+"""
+Sempre usar cdef nas variáveis que não mudam de tipo
+"""
 cdef list labels = [
      1,
     -1,
@@ -26,10 +33,19 @@ cdef list labels = [
      1
 ]
 
+"""
+Quando tiver muitos elementos de lista sendo acessados, é melhor
+converter esses elementos de lista em um struct para reduzir
+as procuras de lista. Struct é mais eficiente
+"""
 cdef struct data_t:
     float x
     float y
 
+"""
+Faz uma função que pega a lista que voce tava trabalhando
+e transforma em uma lista de structs, ao invés de ser uma lista de listas
+"""
 cdef void make_dado_struct(list dados_list, data_t *dados_struct):
     cdef data_t *dado
 
@@ -45,6 +61,10 @@ def pipeline():
     #
     # initial parameters
     #
+
+    """
+    Sempre tacar cdef em tudo que puder
+    """
     cdef:
         float a = 1, b = -2, c = -1, x, y
         float score, pull, step_size
