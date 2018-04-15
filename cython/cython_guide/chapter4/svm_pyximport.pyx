@@ -17,7 +17,7 @@ data_points_list = [
     [ 2.1,  -3]
 ]
 
-labels = [
+cdef list labels = [
      1,
     -1,
      1,
@@ -29,10 +29,6 @@ labels = [
 cdef struct data_t:
     float x
     float y
-
-cdef struct label_t:
-    int z
-
 
 cdef void make_dado_struct(list dados_list, data_t *dados_struct):
     cdef data_t *dado
