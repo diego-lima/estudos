@@ -29,9 +29,10 @@ def pipeline():
     #
     # initial parameters
     #
-    a = 1
-    b = -2
-    c = -1
+    cdef:
+        float a = 1, b = -2, c = -1, x, y
+        float score, pull, step_size
+        int i, label
 
 
     for iter in xrange(500000):
