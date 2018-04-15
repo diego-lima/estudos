@@ -6,7 +6,8 @@
 [3.0, 1.1] -> -1
 [2.1, -3] -> +1
 """
-from random import random
+# from random import random
+from libc.stdlib cimport rand, RAND_MAX
 data = [
     [ 1.2, 0.7],
     [-0.3, 0.5],
@@ -32,12 +33,13 @@ def pipeline():
     cdef:
         float a = 1, b = -2, c = -1, x, y
         float score, pull, step_size
-        int i, label
+        int i, label, length
 
+    length = len(data) - 1
 
     for iter in xrange(500000):
         # pick a random data point
-        i = int(random() * len(data))
+        i = int(rand()/(1.0*RAND_MAX)*length)
         x = data[i][0]
         y = data[i][1]
         label = labels[i]
