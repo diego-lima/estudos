@@ -54,3 +54,9 @@ def pipeline():
         a += step_size * (x * pull - a) # -a is from the regularization
         b += step_size * (y * pull - b) # -b is from the regularization
         c += step_size * (1 * pull)
+
+    return a,b,c
+
+
+if __name__ == "__main__":
+    print pipeline()
