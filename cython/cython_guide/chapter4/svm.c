@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <iostream>
+#include <time.h>
 #define N 500000
+
+using namespace std;
 
 int main(){
     float a = 1, b = -2, c = -1, x, y;
@@ -23,8 +27,10 @@ int main(){
         -1,
         1
     };
+    clock_t t;
+    t = clock();
     for (iter = 0; iter < N; iter++){
-        i = rand() % 6;
+        i = iter % 6;
         x = data[i][0];
         y = data[i][1];
         label = labels[i];
@@ -42,6 +48,8 @@ int main(){
         c += step_size * (1 * pull);
 
     }
+    t = clock() - t;
+    cout<<"tempo: "<< t*1.0/CLOCKS_PER_SEC<<endl;
     printf("%f %f %f\n", a, b, c);
     return 0;
 

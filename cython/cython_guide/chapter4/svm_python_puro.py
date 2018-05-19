@@ -33,10 +33,11 @@ def pipeline():
     b = -2
     c = -1
 
-
+    import time
+    s = time.time()
     for iter in xrange(500000):
         # pick a random data point
-        i = int(random() * len(data))
+        i = iter % 6
         x = data[i][0]
         y = data[i][1]
         label = labels[i]
@@ -54,6 +55,8 @@ def pipeline():
         a += step_size * (x * pull - a) # -a is from the regularization
         b += step_size * (y * pull - b) # -b is from the regularization
         c += step_size * (1 * pull)
+
+    print time.time() - s
 
     return a,b,c
 
