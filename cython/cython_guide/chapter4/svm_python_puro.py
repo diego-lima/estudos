@@ -37,7 +37,7 @@ def pipeline():
     s = time.time()
     for iter in xrange(500000):
         # pick a random data point
-        i = iter % 6
+        i = int(random() * len(data))
         x = data[i][0]
         y = data[i][1]
         label = labels[i]
