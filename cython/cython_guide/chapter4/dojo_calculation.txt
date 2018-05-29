@@ -1,0 +1,2 @@
+> qual a quantidade de formas possiveis que eu posso subir uma escada de N degraus, dado que
+eu posso dar de P = {1,2,3} passos de cada vez? (N e P são variáveis)

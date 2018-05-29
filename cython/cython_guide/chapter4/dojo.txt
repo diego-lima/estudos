@@ -1,0 +1,39 @@
+--- Cython for Dummies ---
+
+>O que é Cython
+	> Python é interpretado
+	> Python é baseado em C
+	> C/C++ é compilado				[OK] embasar no livro sobre  o que é cython
+
+> O porquê de Python ser tão lento
+	> Tudo pode mudar a qualquer momento
+	> Vale a pena mesmo sendo lento
+
+> Como Cython soluciona o problema da performance
+	> O interpretador não precisa adivinhar se você disser
+	> Se você der informações o suficiente, a performance se iguala à do C
+
+							[*] ver no livro como compara o código C criado em cython e python puro
+							[*] mostrar tambem o timeit do ipython
+
+> Vantagens do Cython
+	> codigo com alta performance
+	> você pode escrever tudo em python, identificar um gargalo e agir só sobre ele
+	> o resto do código permanece inalterado
+
+							[*] ver no livro profiling techniques
+
+> Desvantagens do Cython
+	> uma certa barreira de entrada
+	> Precisa saber tanto python quanto C
+	> Dependendo do caso, pode ser tão lento quanto python
+						
+							[*] ver no livro cpu/memory/network performances
+
+> Caso de estudo
+	> pyximport
+	> cdefs
+	> dando preferência a funções que já tem implementação em C
+	> evitando tipos lentos do python como lists e dicts
+
+							[*] ver no livro como funciona o pyximport
